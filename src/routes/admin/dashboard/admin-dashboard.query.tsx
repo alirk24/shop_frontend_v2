@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import useAxiosProtected from '@/hooks/use-axios-protected.hook';
 import { OrderStatus } from '@/routes/(dashboard)/orders/constants/orders.constants';
 import { OrderItem, Orders } from '@/routes/(dashboard)/orders/orders.types';

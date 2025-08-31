@@ -11,7 +11,7 @@ import useAddCommentMutation from './add-comment-mutation';
 const addCommentValidation = z.object({ comment: z.string().min(1) });
 type AddCommentValidationType = z.infer<typeof addCommentValidation>;
 
-const AddCommentForm = () => {
+const AddCommentForm = ({ lang = 'en' }) => {
   const { mutate, isPending } = useAddCommentMutation();
 
   const { control, handleSubmit } = useForm<AddCommentValidationType>({
@@ -24,7 +24,9 @@ const AddCommentForm = () => {
 
   return (
     <form onSubmit={handleSubmit(submitHandler)} className="w-full p-4 pb-6">
-      <p className="text-sm md:text-base">comment text *</p>
+      <p className="text-sm md:text-base">
+        {lang == 'fa' ? 'متن نظر' : 'comment text'} *
+      </p>
       <Controller
         control={control}
         name="comment"
@@ -43,10 +45,12 @@ const AddCommentForm = () => {
         variant={isPending ? 'disabled' : 'default'}
         className="w-full mt-6 text-sm md:text-base rounded-lg md:rounded-lg"
       >
-        Confirmation
+        {lang == 'fa' ? 'تایید' : 'Confirmation'}
       </Button>
       <p className="mt-6 text-center text-sm md:text-base">
-        Your comment will be registered after admin review.
+        {lang == 'fa'
+          ? 'نظر شما پس از بررسی توسط مدیریت ثبت خواهد شد.'
+          : ' Your comment will be registered after admin review.'}
       </p>
     </form>
   );

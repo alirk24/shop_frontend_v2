@@ -7,13 +7,14 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper/types';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import { Button } from '@/components/ui/button';
 
 import StandardProductCard from './cards/standard-product-card.component';
 
 type HomeSuperSaleProps = {
   products: Product[];
+  lang: string;
 };
 
 const HomeSuperSale = (props: HomeSuperSaleProps) => {
@@ -29,7 +30,11 @@ const HomeSuperSale = (props: HomeSuperSaleProps) => {
               swiperRef.current?.slidePrev();
             }}
           >
-            <ChevronLeft className="text-primary-200" />
+            {props.lang == 'fa' ? (
+              <ChevronRight className="text-primary-200" />
+            ) : (
+              <ChevronLeft className="text-primary-200" />
+            )}
           </div>
 
           <div
@@ -38,7 +43,11 @@ const HomeSuperSale = (props: HomeSuperSaleProps) => {
               swiperRef.current?.slideNext();
             }}
           >
-            <ChevronRight className="text-white" />
+            {props.lang == 'fa' ? (
+              <ChevronLeft className="text-white" />
+            ) : (
+              <ChevronRight className="text-white" />
+            )}
           </div>
         </div>
 
@@ -58,7 +67,7 @@ const HomeSuperSale = (props: HomeSuperSaleProps) => {
         >
           {props.products.map((item) => (
             <SwiperSlide key={item.id}>
-              <StandardProductCard {...item} />
+              <StandardProductCard {...item} lang={props.lang} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -66,9 +75,15 @@ const HomeSuperSale = (props: HomeSuperSaleProps) => {
           <div className="super-sale-pagination"></div>
         </div>
         <div className="flex justify-center md:hidden self-center">
-          <Link href="/shop?promotion=true">
+          <Link
+            href={
+              props.lang == 'fa'
+                ? '/fa/shop?promotion=true'
+                : '/shop?promotion=true'
+            }
+          >
             <Button className="mt-6 md:mt-10 font-black font-nunito w-[225px] h-[48px] md:h-16 md:text-xl shadow-color-md md:shadow-color-xl">
-              Show more
+              {props.lang == 'fa' ? 'موارد بیشتر' : 'Show more'}
             </Button>
           </Link>
         </div>
@@ -90,7 +105,7 @@ const HomeSuperSale = (props: HomeSuperSaleProps) => {
         >
           {props.products.map((item) => (
             <SwiperSlide key={item.id}>
-              <StandardProductCard {...item} />
+              <StandardProductCard {...item} lang={props.lang} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -100,12 +115,19 @@ const HomeSuperSale = (props: HomeSuperSaleProps) => {
         {/* mobile */}
         <div className="md:hidden w-[315px] h-[314px] relative">
           <div className="w-[315px] h-[211px] px-4 pt-[147px] pb-4 left-0 top-[103px] absolute bg-primary-500 justify-center items-center inline-flex">
-            <Link href={'/shop?promotion=true'} className="w-full">
+            <Link
+              href={
+                props.lang == 'fa'
+                  ? '/fa/shop?promotion=true'
+                  : '/shop?promotion=true'
+              }
+              className="w-full"
+            >
               <Button
                 variant={'secondary'}
                 className="w-full h-12 rounded-none font-extrabold"
               >
-                Show more
+                {props.lang == 'fa' ? 'موارد بیشتر' : 'Show more'}
               </Button>
             </Link>
           </div>
@@ -120,12 +142,19 @@ const HomeSuperSale = (props: HomeSuperSaleProps) => {
           <div className="w-[301px] h-[365px] left-0 top-[96px] absolute bg-primary-500" />
           <div className="w-[276px] left-[12px] top-[-18px] absolute flex-col justify-center items-center inline-flex">
             <img className="w-[276px] h-[409px]" src="/static/super-sale.png" />
-            <Link href={'/shop?promotion=true'} className="w-full">
+            <Link
+              href={
+                props.lang == 'fa'
+                  ? '/fa/shop?promotion=true'
+                  : '/shop?promotion=true'
+              }
+              className="w-full"
+            >
               <Button
                 variant={'secondary'}
                 className="w-full h-[54px] rounded-none md:text-xl font-extrabold"
               >
-                Show more
+                {props.lang == 'fa' ? 'موارد بیشتر' : 'Show more'}
               </Button>
             </Link>
           </div>

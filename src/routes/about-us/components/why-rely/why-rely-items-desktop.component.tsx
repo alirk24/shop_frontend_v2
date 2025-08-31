@@ -1,4 +1,4 @@
-const WhyRelyItemsDesktop = () => {
+const WhyRelyItemsDesktop = ({ lang = 'en' }) => {
   return (
     <section className="hidden md:flex gap-8">
       <div className="w-full">
@@ -10,7 +10,9 @@ const WhyRelyItemsDesktop = () => {
             />
           </div>
           <p className="mt-4 font-black font-nunito md:text-base text-center">
-            Uncompromising quality assured
+            {lang == 'fa'
+              ? 'کیفیت تضمین شده و بدون افت کیفیت'
+              : 'Uncompromising quality assured'}
           </p>
         </div>
         <div className="flex flex-col items-center bg-nature-600 rounded-xl p-6 mt-6">
@@ -21,7 +23,9 @@ const WhyRelyItemsDesktop = () => {
             />
           </div>
           <p className="mt-4 font-black font-nunito md:text-base text-center">
-            Competitive prices, premium quality
+            {lang == 'fa'
+              ? 'قیمت‌های رقابتی، کیفیت درجه یک'
+              : 'Competitive prices, premium quality'}
           </p>
         </div>
       </div>
@@ -34,7 +38,9 @@ const WhyRelyItemsDesktop = () => {
             />
           </div>
           <p className="mt-4 font-black font-nunito md:text-base text-center">
-            25+ years in pet supplies
+            {lang == 'fa'
+              ? '۲۵+ سال سابقه در زمینه لوازم حیوانات خانگی'
+              : '25+ years in pet supplies'}
           </p>
         </div>
         <div className="flex flex-col items-center bg-nature-600 rounded-xl p-6 mt-6">
@@ -45,7 +51,7 @@ const WhyRelyItemsDesktop = () => {
             />
           </div>
           <p className="mt-4 font-black font-nunito md:text-base text-center">
-            Top-tier materials only
+            {lang == 'fa' ? 'فقط مواد درجه یک' : 'Top-tier materials only'}
           </p>
         </div>
       </div>

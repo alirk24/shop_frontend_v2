@@ -17,7 +17,7 @@ import {
 } from './constants/orders.constants';
 import useOrdersQuery from './orders.query';
 
-const Orders = () => {
+const Orders = ({ lang = 'en' }) => {
   const [tabValue, setTabValue] = useState<OrderStatusTabsType>('Delivered');
 
   const { data, isPending } = useOrdersQuery();
@@ -34,7 +34,7 @@ const Orders = () => {
           className="md:hidden flex gap-1 items-center "
         >
           <SvgLongArrow20 />
-          Orders
+          {lang == 'fa' ? 'سفارشات' : 'Orders'}
         </Link>
         <section className="md:mt-0 mt-8 border border-nature-900 rounded-2xl py-4 md:py-6 mb-4">
           <div className="flex items-center gap-2 md:gap-3 px-4 md:px-6 font-nunito font-bold md:text-xl">
@@ -42,7 +42,7 @@ const Orders = () => {
               <SvgListDoListCheckmarkRed20 className="md:hidden" />
               <SvgListDoListCheckmarkRed24 className="hidden md:block" />
             </Icon>
-            Order history
+            {lang == 'fa' ? 'تاریخچه سفارشات' : 'Order history'}
           </div>
           <ul className="flex w-full mt-7 md:mt-11 gap-4 md:gap-10 overflow-x-scroll border-b border-nature-900 px-4 md:px-6">
             {ORDER_STATUS_TABS.map((item) => {
@@ -64,7 +64,7 @@ const Orders = () => {
                   )}
                 >
                   <p className="text-sm md:text-lg md:font-nunito whitespace-nowrap">
-                    {item.name}
+                    {lang == 'fa' ? item.nameFa : item.name}
                   </p>
                   <span
                     className={cn(
@@ -81,11 +81,14 @@ const Orders = () => {
           <ul className="flex flex-col gap-5 mt-6 px-4">
             {orders.length === 0 && (
               <p className="font-semibold text-center h-[500px]">
-                Nothing to show
+                {lang == 'fa'
+                  ? 'سفارشی جهت نمایش وجود ندارد'
+                  : 'Nothing to show'}
               </p>
             )}
             {orders.map((o) => (
               <OrdersCard
+                lang={lang}
                 key={o.id}
                 status={o.status}
                 date={o.created_at}

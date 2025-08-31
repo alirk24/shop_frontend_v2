@@ -8,7 +8,7 @@ import MobileInfo from './components/mobile-info.component';
 import OrdersSummary from './components/orders-summary.component';
 import useDashboardQuery from './dashboard.query';
 
-const MainDashboard = () => {
+const MainDashboard = ({ lang = 'en' }) => {
   const { data, isPending } = useDashboardQuery();
 
   if (isPending) return <LoadingSpinner className="mt-20" />;
@@ -17,9 +17,9 @@ const MainDashboard = () => {
     return (
       <main>
         <MobileInfo email={data.email} fullName={data.full_name} />
-        <OrdersSummary summary={data.orders_summary} />
-        <LastOrders lastOrder={data.last_order} />
-        <DashboardPages />
+        <OrdersSummary lang={lang} summary={data.orders_summary} />
+        <LastOrders lang={lang} lastOrder={data.last_order} />
+        <DashboardPages lang={lang} />
       </main>
     );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-import { Category } from '@/app/(core)/shop/page';
+import { Category } from '@/app/(en)/(core)/shop/page';
 import { Button } from '@/components/ui/button';
 import { Combobox } from '@/components/ui/combobox';
 import { Input } from '@/components/ui/input';

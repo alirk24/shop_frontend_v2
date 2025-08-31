@@ -15,24 +15,32 @@ export const DASHBOARD_ROUTES = [
     icon: SvgGridLayout24,
     activeIcon: SvgGridLayoutRed24,
     link: '/dashboard/main',
+    linkFa: '/fa/dashboard/main',
+    nameFa: 'داشبورد',
   },
   {
     name: 'Orders',
     icon: SvgListDoListCheckmark24,
     activeIcon: SvgListDoListCheckmarkRed24,
     link: '/dashboard/orders',
+    linkFa: '/fa/dashboard/orders',
+    nameFa: 'سفارشات',
   },
   {
     name: 'Saved',
     icon: SvgHeart24,
     activeIcon: SvgHeartRed24,
     link: '/dashboard/saved',
+    linkFa: '/fa/dashboard/saved',
+    nameFa: 'ذخیره شده',
   },
   {
     name: 'Profile',
     icon: SvgSingleUser24,
     activeIcon: SvgSingleUserRed24,
     link: '/dashboard/profile',
+    linkFa: '/fa/dashboard/profile',
+    nameFa: 'حساب کاربری',
   },
 ];
 

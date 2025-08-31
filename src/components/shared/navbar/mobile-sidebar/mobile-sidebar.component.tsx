@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { Category } from '@/app/(core)/shop/page';
+import { Category } from '@/app/(en)/(core)/shop/page';
 import SvgMobileSidebarLogo from '@/assets/svg/logo-title-mobile.svg';
 import Icon from '@/components/icon';
 import {
@@ -23,6 +23,7 @@ import MobileSearch from './mobile-search.component';
 
 type Props = {
   categories?: Category[];
+  lang: string;
 };
 
 const MobileSidebar = (props: Props) => {
@@ -45,7 +46,9 @@ const MobileSidebar = (props: Props) => {
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
       <SheetTrigger>
-        <Icon className="md:hidden flex justify-center items-center w-8 h-8 bg-nature-600 rounded-lg">
+        <Icon
+          className={`${props.lang == 'fa' ? ' rotate-180 ' : ' '} md:hidden flex justify-center items-center w-8 h-8 bg-nature-600 rounded-lg`}
+        >
           <SvgMenuBurger className="w-6 h-6" />
         </Icon>
       </SheetTrigger>
@@ -57,26 +60,35 @@ const MobileSidebar = (props: Props) => {
         </div>
 
         <ul className="flex flex-col gap-3 mt-6">
-          <Link href="/">
+          <Link href={props.lang == 'fa' ? '/fa' : '/'}>
             <li
               className={cn(
                 'text-sm',
-                pathname === '/' ? 'font-bold text-primary-500' : '',
+                pathname === '/' || pathname === '/fa'
+                  ? 'font-bold text-primary-500'
+                  : '',
               )}
             >
-              Home
+              {props.lang == 'fa' ? 'خانه' : 'Home'}
             </li>
           </Link>
           <AccordionFilter type="single" collapsible>
             <AccordionItemFilter value="shop" className="border-none">
               <AccordionTriggerFilter className="p-0">
-                <li className={cn('text-sm font-normal')}>Shop</li>
+                <li className={cn('text-sm font-normal')}>
+                  {' '}
+                  {props.lang == 'fa' ? 'فروشگاه' : 'Shop'}
+                </li>
               </AccordionTriggerFilter>
               <AccordionContentFilter className="py-1">
                 {props.categories?.map((item) => (
                   <Link
                     key={item.id}
-                    href={`/shop?category=${item.id}`}
+                    href={
+                      props.lang == 'fa'
+                        ? `/fa/shop?category=${item.id}`
+                        : `/shop?category=${item.id}`
+                    }
                     className="flex gap-2 items-center rounded-lg cursor-pointer p-1 py-2 hover:bg-nature-200"
                   >
                     <span className="flex items-center w-[39px] aspect-video rounded-md overflow-hidden bg-nature-700">
@@ -88,27 +100,31 @@ const MobileSidebar = (props: Props) => {
               </AccordionContentFilter>
             </AccordionItemFilter>
           </AccordionFilter>
-          <Link href="/about-us">
+          <Link href={props.lang == 'fa' ? '/fa/about-us' : '/about-us'}>
             <li
               className={cn(
                 'text-sm',
-                pathname === '/about-us' ? 'font-bold text-primary-500' : '',
+                pathname === '/about-us' || pathname === '/fa/about-us'
+                  ? 'font-bold text-primary-500'
+                  : '',
               )}
             >
-              About us
+              {props.lang == 'fa' ? 'درباره ما' : 'About us'}
             </li>
           </Link>
-          <Link href="/contact-us">
+          <Link href={props.lang == 'fa' ? '/fa/contact-us' : '/contact-us'}>
             <li
               className={cn(
                 'text-sm',
-                pathname === '/contact-us' ? 'font-bold text-primary-500' : '',
+                pathname === '/contact-us' || pathname === '/fa/contact-us'
+                  ? 'font-bold text-primary-500'
+                  : '',
               )}
             >
-              Contact us
+              {props.lang == 'fa' ? 'تماس با ما' : 'Contact us'}
             </li>
           </Link>
-          <a href={process.env.NEXT_PUBLIC_BLOG_BASE_URL + '/blog'}>
+          {/* <a href={process.env.NEXT_PUBLIC_BLOG_BASE_URL + '/blog'}>
             <li
               className={cn(
                 'text-sm',
@@ -117,7 +133,7 @@ const MobileSidebar = (props: Props) => {
             >
               Blog
             </li>
-          </a>
+          </a> */}
         </ul>
       </SheetContent>
     </Sheet>

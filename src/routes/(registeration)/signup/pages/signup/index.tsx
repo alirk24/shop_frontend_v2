@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 
 import SignupForm from './signup-form';
 
-const Signup = () => {
+const Signup = ({ lang = 'en' }) => {
   return (
     <main className="flex min-h-screen justify-center items-center md:py-24 py-7">
       <section className="flex flex-col items-center px-5 md:w-[486px] md:border md:border-nature-800 md:rounded-2xl md:p-6">
@@ -19,9 +19,11 @@ const Signup = () => {
         </Icon>
 
         <h3 className="mt-6 md:mt-7 md:text-2xl font-nunito font-extrabold">
-          Create your account
+          {lang == 'fa' ? 'ایجاد حساب کاربری' : 'Create your account'}
         </h3>
-        <p className="mt-2 md:mt-3 text-sm md:text-lg">Let’s get started!</p>
+        <p className="mt-2 md:mt-3 text-sm md:text-lg">
+          {lang == 'fa' ? 'بیایید شروع کنیم!' : 'Let’s get started!'}
+        </p>
 
         {/* <Button className="w-full flex gap-2 bg-transparent border border-nature-800 mt-6 md:mt-8 py-[11px] rounded-lg text-sm md:text-base font-normal md:font-normal text-text-500 hover:bg-transparent">
           <Icon>
@@ -39,15 +41,15 @@ const Signup = () => {
           <div className="w-full border-t border-nature-800"></div>
         </div> */}
 
-        <SignupForm />
+        <SignupForm lang={lang} />
 
         <p className="mt-4 md:mt-6 text-sm md:text-base">
-          Already have an account?{' '}
+          {lang == 'fa' ? 'حساب کاربری دارید؟' : 'Already have an account?'}{' '}
           <Link
             href={'/login'}
             className="font-semibold text-link cursor-pointer"
           >
-            Sing in
+            {lang == 'fa' ? 'ورود به حساب کاربری' : 'Sing in'}
           </Link>
         </p>
       </section>

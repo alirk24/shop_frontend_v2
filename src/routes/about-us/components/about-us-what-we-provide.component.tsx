@@ -5,14 +5,14 @@ import React from 'react';
 
 import { Button } from '@/components/ui/button';
 
-const AboutUsWhatWeProvide = () => {
+const AboutUsWhatWeProvide = ({ lang = 'en' }) => {
   const router = useRouter();
 
   return (
     <main className="px-5 md:px-20 mt-16 md:mt-24 flex flex-col md:flex-row gap-6">
       <section
         onClick={() => {
-          router.push('/shop');
+          lang == 'fa' ? router.push('/fa/shop') : router.push('/shop');
         }}
         className="bg-[#FF782B] h-[337px] md:h-[261px] rounded-lg md:rounded-2xl w-full overflow-hidden cursor-pointer"
       >
@@ -27,25 +27,27 @@ const AboutUsWhatWeProvide = () => {
 
           <div className="p-4 md:px-6 md:py-8">
             <p className="font-nunito font-black text-lg md:text-2xl text-white">
-              Get Free Shipping on
-              <br /> Orders Over $50
+              {lang === 'fa' ? 'ارسال رایگان برای' : 'Get Free Shipping on'}
+              <br />{' '}
+              {lang === 'fa' ? 'سفارش‌های بالای 50 دلار' : 'Orders Over $50'}
             </p>
             <p className="mt-2 md:mt-3 text-sm md:text-lg text-white leading-6 md:max-w-[360px]">
-              Blandit maecenas vitae sollicitudin aenean hendrerit tortor nisi
-              phasellus tincidunt
+              {lang === 'fa'
+                ? 'بلندیت مایسنا ویتای سالیسیودین آناهنری تورتور نیسی فاسلوس تینسیدنت'
+                : 'Blandit maecenas vitae sollicitudin aenean hendrerit tortor nisi phasellus tincidunt'}
             </p>
             <Button
               variant={'secondary'}
               className="mt-4 rounded-[50px] h-[44px] w-[133px] font-semibold md:text-base"
             >
-              Shop now
+              {lang === 'fa' ? 'خرید کنید' : 'Shop now'}
             </Button>
           </div>
         </div>
       </section>
       <section
         onClick={() => {
-          router.push('/shop');
+          lang == 'fa' ? router.push('/fa/shop') : router.push('/shop');
         }}
         className="bg-[#774AD8] h-[337px] md:h-[261px] rounded-lg md:rounded-2xl w-full overflow-hidden cursor-pointer"
       >
@@ -53,24 +55,26 @@ const AboutUsWhatWeProvide = () => {
           <div className="absolute bottom-0 md:right-6 w-full flex justify-center md:justify-end">
             <img
               src="/static/buy-one-get-one.png"
-              alt="free shipping"
+              alt="buy one get one"
               className="w-[145px] md:w-[195px]"
             />
           </div>
           <div className="p-4 md:px-6 md:py-8">
             <p className="font-nunito font-black text-lg md:text-2xl text-white">
-              Buy One, Get One
-              <br className="hidden md:block" /> 50% Off
+              {lang === 'fa'
+                ? 'یک عدد بخرید، یکی دیگر با 50% تخفیف'
+                : 'Buy One, Get One 50% Off'}
             </p>
             <p className="mt-2 md:mt-3 text-sm md:text-lg text-white leading-6 md:max-w-[360px]">
-              Blandit maecenas vitae sollicitudin aenean hendrerit tortor nisi
-              phasellus tincidunt
+              {lang === 'fa'
+                ? 'بلندیت مایسنا ویتای سالیسیودین آناهنری تورتور نیسی فاسلوس تینسیدنت'
+                : 'Blandit maecenas vitae sollicitudin aenean hendrerit tortor nisi phasellus tincidunt'}
             </p>
             <Button
               variant={'secondary'}
               className="mt-4 rounded-[50px] h-[44px] w-[133px] font-semibold md:text-base"
             >
-              Shop now
+              {lang === 'fa' ? 'خرید کنید' : 'Shop now'}
             </Button>
           </div>
         </div>

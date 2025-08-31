@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { Category } from '@/app/(core)/shop/page';
+import { Category } from '@/app/(en)/(core)/shop/page';
 
 type UseAdminCategoriesStoreType = {
   isDeleteCategorymodlOpen?: string;

@@ -8,6 +8,7 @@ import Icon from '../icon';
 
 type ShopSecificationsProps = {
   className?: string;
+  lang: string;
 };
 
 const ShopSpecifications = (props: ShopSecificationsProps) => {
@@ -24,9 +25,13 @@ const ShopSpecifications = (props: ShopSecificationsProps) => {
           <SvgMedal36 className="hidden md:block" />
         </Icon>
         <div className="flex flex-col gap-2">
-          <p className="text-sm md:text-base md:text-center">Experience</p>
+          <p className="text-sm md:text-base md:text-center">
+            {props.lang == 'fa' ? 'تجربه' : 'Experience'}
+          </p>
           <p className="text-sm md:text-base font-semibold md:text-center">
-            25+ years in pet supplies
+            {props.lang == 'fa'
+              ? '۲۵+ سال سابقه در زمینه لوازم حیوانات خانگی'
+              : '25+ years in pet supplies'}
           </p>
         </div>
       </li>
@@ -37,9 +42,13 @@ const ShopSpecifications = (props: ShopSecificationsProps) => {
           <SvgShield36 className="hidden md:block" />
         </Icon>
         <div className="flex flex-col gap-2">
-          <p className="text-sm md:text-base md:text-center">Materials</p>
+          <p className="text-sm md:text-base md:text-center">
+            {props.lang == 'fa' ? 'مواد و مصالح' : 'Materials'}
+          </p>
           <p className="text-sm md:text-base font-semibold md:text-center">
-            Top-tier materials only
+            {props.lang == 'fa'
+              ? 'فقط مواد درجه یک'
+              : 'Top-tier materials only'}
           </p>
         </div>
       </li>
@@ -51,9 +60,13 @@ const ShopSpecifications = (props: ShopSecificationsProps) => {
           <SvgMoney36 className="hidden md:block" />
         </Icon>
         <div className="flex flex-col gap-2">
-          <p className="text-sm md:text-base md:text-center">Prices</p>
+          <p className="text-sm md:text-base md:text-center">
+            {props.lang == 'fa' ? 'قیمت‌ها' : 'Prices'}
+          </p>
           <p className="text-sm md:text-base font-semibold md:text-center">
-            Competitive prices, premium quality
+            {props.lang == 'fa'
+              ? 'قیمت‌های رقابتی، کیفیت درجه یک'
+              : 'Competitive prices, premium quality'}
           </p>
         </div>
       </li>
@@ -65,9 +78,13 @@ const ShopSpecifications = (props: ShopSecificationsProps) => {
           <SvgStarOutlined36 className="hidden md:block" />
         </Icon>
         <div className="flex flex-col gap-2">
-          <p className="text-sm md:text-base md:text-center">Quality</p>
+          <p className="text-sm md:text-base md:text-center">
+            {props.lang == 'fa' ? 'کیفیت' : 'Quality'}
+          </p>
           <p className="text-sm md:text-base font-semibold md:text-center">
-            Uncompromising quality assured
+            {props.lang == 'fa'
+              ? 'کیفیت تضمین شده و بدون افت کیفیت'
+              : ' Uncompromising quality assured'}
           </p>
         </div>
       </li>

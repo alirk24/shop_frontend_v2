@@ -1,10 +1,11 @@
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 
 import ImagesShowcase from './images-showcase.component';
 import OfferCard from './offer-card.component';
 import ProductDetailsSection from './product-details-section.component';
 
 export type ProductWildCardProps = {
+  lang: string;
   id: number;
   title: string;
   description: string;
@@ -33,10 +34,14 @@ const ProductWildCard = (props: ProductWildCardProps) => {
       <main className="mt-6 md:mt-8 mx-5 md:mx-20 flex flex-col md:grid md:grid-cols-12 md:gap-14">
         {props.activePromotions && (
           <div className="md:hidden">
-            <OfferCard activePromotions={props.activePromotions} />
+            <OfferCard
+              lang={props.lang}
+              activePromotions={props.activePromotions}
+            />
           </div>
         )}
         <ImagesShowcase
+          lang={props.lang}
           images={props.images}
           discount={props.totalDiscount}
           hasActivePromotion={!!props.activePromotions}

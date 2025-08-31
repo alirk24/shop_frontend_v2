@@ -9,7 +9,7 @@ import Icon from '@/components/icon';
 import OrdersCard from '../../_components/cards/oreders-card.component';
 import { Orders } from '../../orders/orders.types';
 
-type LastOrderProps = { lastOrder: Orders };
+type LastOrderProps = { lastOrder: Orders; lang: string };
 
 const LastOrders = (props: LastOrderProps) => {
   return (
@@ -20,13 +20,15 @@ const LastOrders = (props: LastOrderProps) => {
             <SvgShoppingCartMobile className="md:hidden" />
             <SvgShoppingCartDesktop className="hidden md:block" />
           </Icon>
-          Your last order
+          {props.lang == 'fa' ? 'آخرین سفارش شما' : 'Your last order'}
         </div>
         <Link
-          href={'/dashboard/orders'}
+          href={
+            props.lang == 'fa' ? '/fa/dashboard/orders' : '/dashboard/orders'
+          }
           className="flex items-center text-sm md:text-base font-nunito text-link"
         >
-          All order
+          {props.lang == 'fa' ? 'تمامی سفارشات' : 'All order'}
           <SvgArrow24 className="md:hidden" />
           <SvgArrow32 className="hidden md:block" />
         </Link>
@@ -34,11 +36,14 @@ const LastOrders = (props: LastOrderProps) => {
       <ul className="flex flex-col gap-5 mt-6 md:mt-8">
         {!props.lastOrder && (
           <p className="font-semibold text-center mt-20">
-            you don&apos;t have any order yet
+            {props.lang == 'fa'
+              ? 'شما تا کنون سفارشی ثبت نکرده‌اید'
+              : "you don't have any order yet"}
           </p>
         )}
         {props.lastOrder && (
           <OrdersCard
+            lang={props.lang}
             date={props.lastOrder.created_at}
             orderId={props.lastOrder.id}
             orderItem={props.lastOrder.order_items}

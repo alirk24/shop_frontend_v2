@@ -13,7 +13,7 @@ import SavedProductCard from './components/cards/saved-products-card.component';
 import DeleteSavedProductModal from './components/modals/delete-saved-product.modal';
 import useSaveProductsQuery from './saved-products.query';
 
-const Saved = () => {
+const Saved = ({ lang = 'en' }) => {
   const { data, isPending } = useSaveProductsQuery();
 
   if (isPending) return <LoadingSpinner className="mt-20" />;
@@ -27,7 +27,7 @@ const Saved = () => {
           className="md:hidden flex gap-1 items-center "
         >
           <SvgLongArrow20 />
-          Saved
+          {lang == 'fa' ? 'ذخیره شده' : 'Saved'}
         </Link>
         <section className="border border-nature-900 rounded-2xl mt-8 md:mt-0 py-4 md:py-6">
           <div className="flex items-center gap-2 md:gap-3 px-4 md:px-6 font-nunito font-bold md:text-xl">
@@ -35,12 +35,13 @@ const Saved = () => {
               <SvgHeartRed20 className="md:hidden" />
               <SvgHeartRed24 className="hidden md:block" />
             </Icon>
-            Saved
+            {lang == 'fa' ? 'ذخیره شده' : 'Saved'}
           </div>
 
           <ul className="flex flex-col gap-5 px-4 md:px-6 mt-6 md:grid md:grid-cols-3 md:gap-4">
             {data.products.map((item) => (
               <SavedProductCard
+                lang={lang}
                 key={item.id}
                 id={item.id}
                 name={item.name}

@@ -9,6 +9,7 @@ import { useCartStore } from '@/store/cart.store';
 
 type OrderDetailsProps = {
   isLoading: boolean;
+  lang: string;
 };
 
 const OrderDetails = (props: OrderDetailsProps) => {
@@ -19,10 +20,12 @@ const OrderDetails = (props: OrderDetailsProps) => {
 
   return (
     <section className="flex flex-col border border-nature-900 rounded-xl md:rounded-2xl p-3 md:p-5 md:col-span-4 md:h-min md:mt-14">
-      <h3 className="font-nunito font-black text-lg md:text-2xl">Your Order</h3>
+      <h3 className="font-nunito font-black text-lg md:text-2xl">
+        {props.lang == 'fa' ? 'سفارش شما' : 'Your Order'}
+      </h3>
 
       <p className="font-nunito font-bold text-sm md:text-lg mt-4 md:mt-6">
-        Products ({cart.length})
+        {props.lang == 'fa' ? 'تعداد کالا' : 'Products'} ({cart.length})
       </p>
       <ul className="flex flex-col">
         {cart?.map((item) => (
@@ -33,31 +36,47 @@ const OrderDetails = (props: OrderDetailsProps) => {
             <div>
               <p className="font-nunito text-sm md:text-base">{item.title}</p>
               <p className="mt-2 text-sm md:text-base text-text-300">
-                {item.weight}KG / Number {item.count}
+                {item.weight}
+                {props.lang == 'fa' ? 'تعداد / کیلوگرم ' : ' KG / Number '}{' '}
+                {item.count}
               </p>
             </div>
             <p className="text-sm md:text-base">
-              ${(item.priceWithDiscount * item.count).toFixed(2)}
+              {props.lang == 'fa' ? '' : '$ '}
+              {(item.priceWithDiscount * item.count).toFixed(2)}
+              {props.lang == 'fa' ? ' تومان' : ''}
             </p>
           </li>
         ))}
       </ul>
       <div className="flex justify-between mt-3 md:mt-4">
-        <p className="font-nunito text-sm md:text-base">Subtotal:</p>
-        <p className="text-sm md:text-base">$ {totalPrice}</p>
+        <p className="font-nunito text-sm md:text-base">
+          {props.lang == 'fa' ? 'مجموع جزئی' : 'Subtotal:'}
+        </p>
+        <p className="text-sm md:text-base">
+          {props.lang == 'fa' ? '' : '$ '}
+          {totalPrice}
+          {props.lang == 'fa' ? ' تومان' : ''}
+        </p>
       </div>
       <div className="flex justify-between mt-3 md:mt-4">
-        <p className="font-nunito text-sm md:text-base">Discount:</p>
+        <p className="font-nunito text-sm md:text-base">
+          {props.lang == 'fa' ? 'تخفیف:' : 'Discount:'}
+        </p>
         <p className="text-sm md:text-base text-error-500">
-          $ {totalDiscount.toFixed(2)} ({discountPercent.toFixed(2)}%)
+          {props.lang == 'fa' ? '' : '$ '}
+          {totalDiscount.toFixed(2)}
+          {props.lang == 'fa' ? ' تومان' : ''} ({discountPercent.toFixed(2)}%)
         </p>
       </div>
       <div className="flex justify-between mt-3 md:mt-4">
         <p className="font-nunito text-sm md:text-base font-extrabold">
-          Total:
+          {props.lang == 'fa' ? 'مجموع' : 'Total:'}
         </p>
         <p className="text-sm md:text-base font-extrabold">
-          $ {finalPrice.toFixed(2)}
+          {props.lang == 'fa' ? '' : '$ '}
+          {finalPrice.toFixed(2)}
+          {props.lang == 'fa' ? ' تومان' : ''}
         </p>
       </div>
       <Button
@@ -67,7 +86,7 @@ const OrderDetails = (props: OrderDetailsProps) => {
         isLoading={props.isLoading}
         className="mt-6 rounded-lg md:rounded-2xl md:text-base"
       >
-        Proceed to checkout
+        {props.lang == 'fa' ? 'اقدام برای تسویه حساب' : 'Proceed to checkout'}
       </Button>
     </section>
   );

@@ -19,7 +19,7 @@ import {
   resetPasswordValidation,
 } from './reset-password.validation';
 
-const ResetPasswordForm = () => {
+const ResetPasswordForm = ({ lang = 'en' }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const params = useSearchParams();
@@ -46,13 +46,18 @@ const ResetPasswordForm = () => {
       onSubmit={handleSubmit(submitHandler)}
       className="w-full flex flex-col mt-6 md:mt-8"
     >
-      <label className="text-sm md:text-base mt-4">New password</label>
+      <label className="text-sm md:text-base mt-4">
+        {' '}
+        {lang == 'fa' ? 'رمز عبور جدید' : 'New Password'}
+      </label>
       <Controller
         control={control}
         name="password"
         render={({ field, fieldState }) => (
           <>
-            <div className="flex items-center bg-nature-600 rounded-lg mt-2 md:mt-3 pr-3">
+            <div
+              className={`flex items-center bg-nature-600 rounded-lg mt-2 md:mt-3 ${lang == 'fa' ? ' pl-3 ' : ' pr-3 '}`}
+            >
               <Input
                 type={showPassword ? 'text' : 'password'}
                 {...field}
@@ -87,7 +92,7 @@ const ResetPasswordForm = () => {
         >
           <SvgCheckmarkCircle />
         </Icon>
-        At least 8 characters
+        {lang == 'fa' ? 'حداقل ۸ کاراکتر' : 'At least 8 characters'}
       </div>
       <div
         className={cn(
@@ -100,7 +105,7 @@ const ResetPasswordForm = () => {
         >
           <SvgCheckmarkCircle />
         </Icon>
-        Letters and numbers
+        {lang == 'fa' ? 'حروف و اعداد' : 'Letters and numbers'}
       </div>
       <Button
         variant={isFormValid === false || isPending ? 'disabled' : 'default'}
@@ -108,7 +113,7 @@ const ResetPasswordForm = () => {
         isLoading={isPending}
         className="font-bold text-sm md:text-base shadow-color-md rounded-xl mt-6 md:mt-8"
       >
-        Reset password
+        {lang == 'fa' ? 'بازنشانی رمز عبور' : 'Reset password'}
       </Button>
     </form>
   );

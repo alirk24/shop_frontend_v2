@@ -21,7 +21,7 @@ import {
   signupValidation,
 } from './signup.validation';
 
-const SignupForm = () => {
+const SignupForm = ({ lang = 'en' }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { mutate, isPending } = useSignupMutation();
@@ -45,7 +45,10 @@ const SignupForm = () => {
       onSubmit={handleSubmit(submitHandler)}
       className="w-full flex flex-col mt-6 md:mt-8"
     >
-      <label className="text-sm md:text-base">Full name</label>
+      <label className="text-sm md:text-base">
+        {' '}
+        {lang === 'fa' ? 'نام و نام خانوادگی' : 'Full name'}
+      </label>
       <Controller
         control={control}
         name="fullname"
@@ -57,7 +60,9 @@ const SignupForm = () => {
           />
         )}
       />
-      <label className="text-sm md:text-base mt-4">Email</label>
+      <label className="text-sm md:text-base mt-4">
+        {lang === 'fa' ? 'ایمیل' : 'Email'}
+      </label>
       <Controller
         control={control}
         name="email"
@@ -69,13 +74,17 @@ const SignupForm = () => {
           />
         )}
       />
-      <label className="text-sm md:text-base mt-4 ">Password</label>
+      <label className="text-sm md:text-base mt-4 ">
+        {lang === 'fa' ? 'رمز عبور' : 'Password'}
+      </label>
       <Controller
         control={control}
         name="password"
         render={({ field, fieldState }) => (
           <>
-            <div className="flex items-center bg-nature-600 rounded-lg mt-2 md:mt-3 pr-3">
+            <div
+              className={`flex items-center bg-nature-600 rounded-lg mt-2 md:mt-3 ${lang == 'fa' ? ' pl-3 ' : ' pr-3 '} `}
+            >
               <Input
                 type={showPassword ? 'text' : 'password'}
                 {...field}
@@ -110,7 +119,7 @@ const SignupForm = () => {
         >
           <SvgCheckmarkCircle />
         </Icon>
-        At least 8 characters
+        {lang === 'fa' ? 'حداقل 8 کاراکتر' : 'At least 8 characters'}
       </div>
       <div
         className={cn(
@@ -123,7 +132,7 @@ const SignupForm = () => {
         >
           <SvgCheckmarkCircle />
         </Icon>
-        Letters and numbers
+        {lang === 'fa' ? 'حروف و اعداد' : 'Letters and numbers'}
       </div>
       <div className="flex items-center w-full gap-2 mt-6">
         <Controller
@@ -142,12 +151,15 @@ const SignupForm = () => {
           htmlFor="terms"
           className="text-xs md:text-base font-nunito  cursor-pointer"
         >
-          I agree to the{' '}
+          {lang == 'fa' ? 'موافقت خود را با' : 'I agree to the'}{' '}
           <span className="underline decoration-text-100">
-            Terms of Service{' '}
+            {lang == 'fa' ? 'شرایط خدمات' : 'Terms of Service'}
           </span>
-          and the{' '}
-          <span className="underline decoration-text-100">Privacy Policy.</span>
+          {lang == 'fa' ? 'و' : 'and the'}{' '}
+          <span className="underline decoration-text-100">
+            {lang == 'fa' ? 'سیاست حفظ حریم خصوصی' : 'Privacy Policy.'}
+          </span>
+          {lang == 'fa' ? 'اعلام می‌نمایم' : ''}
         </label>
       </div>
 
@@ -159,7 +171,7 @@ const SignupForm = () => {
         isLoading={isPending}
         className="mt-6 md:mt-8 font-bold text-sm shadow-color-md md:text-base"
       >
-        Rigester
+        {lang == 'fa' ? 'ثبت نام' : 'Rigester'}
       </Button>
     </form>
   );

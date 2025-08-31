@@ -10,7 +10,7 @@ import SvgSearch from '@icons/search-loupe-custom.svg';
 
 import SearchPopover from './search-popover.component';
 
-const NavbarSearch = () => {
+const NavbarSearch = ({ lang = 'en' }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { width } = UseWindowSize();
 
@@ -37,7 +37,7 @@ const NavbarSearch = () => {
       )}
       {isSearchOpen && (
         <div className="hidden sm:block absolute top-0">
-          <SearchPopover onClose={closeSearch} />
+          <SearchPopover onClose={closeSearch} lang={lang} />
         </div>
       )}
       <div
@@ -50,11 +50,13 @@ const NavbarSearch = () => {
           </Icon>
           <Input
             readOnly
-            placeholder="Search product..."
+            placeholder={lang == 'fa' ? 'جستجو کالا ...' : 'Search product...'}
             className="bg-transparent placeholder:text-text-200 font-nunito border-none text-base"
           />
         </div>
-        <div className="sm:hidden">{isSearchOpen && <SearchPopover />}</div>
+        <div className="sm:hidden">
+          {isSearchOpen && <SearchPopover lang={lang} />}
+        </div>
       </div>
     </>
   );

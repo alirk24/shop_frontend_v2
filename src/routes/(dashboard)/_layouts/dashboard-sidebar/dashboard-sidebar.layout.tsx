@@ -11,7 +11,7 @@ import { useAuthStore } from '@/store/auth.store';
 import { DASHBOARD_ROUTES } from '../../_constants/dashboard-routes.constants';
 import { useDashboardModalsStore } from '../../_store/dashboard-modals.store';
 
-const DashboardSidebarLayout = () => {
+const DashboardSidebarLayout = ({ lang = 'en' }) => {
   const router = useRouter();
   const pathname = usePathname();
   const profile = useAuthStore((s) => s.profile);
@@ -33,7 +33,9 @@ const DashboardSidebarLayout = () => {
           <SvgPenEditDesktop
             className="cursor-pointer"
             onClick={() => {
-              router.push('/dashboard/profile');
+              lang == 'fa'
+                ? router.push('/fa/dashboard/profile')
+                : router.push('/dashboard/profile');
             }}
           />
         </div>
@@ -41,7 +43,7 @@ const DashboardSidebarLayout = () => {
 
         <ul className="flex flex-col gap-6 mt-6">
           {DASHBOARD_ROUTES.map((item) => (
-            <Link key={item.name} href={item.link}>
+            <Link key={item.name} href={lang == 'fa' ? item.linkFa : item.link}>
               <li
                 className={cn(
                   'flex items-center gap-2 px-6',
@@ -56,7 +58,7 @@ const DashboardSidebarLayout = () => {
                   <item.icon />
                 )}
 
-                {item.name}
+                {lang == 'fa' ? item.nameFa : item.name}
               </li>
             </Link>
           ))}
@@ -68,7 +70,7 @@ const DashboardSidebarLayout = () => {
         onClick={() => setIsLogoutModalOpen(true)}
       >
         <SvgLogout />
-        Logout
+        {lang == 'fa' ? 'خروج از حساب کاربری' : 'Logout'}
       </div>
     </section>
   );

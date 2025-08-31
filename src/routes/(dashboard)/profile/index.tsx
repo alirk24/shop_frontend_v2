@@ -12,7 +12,7 @@ import ChangePasswordModal from './components/modals/change-password.modal';
 
 // import EditEmailModal from './components/modals/edit-email/edit-email.modal';
 
-const Profile = () => {
+const Profile = ({ lang = 'en' }) => {
   const { data: profile, isPending: isProfilePending } = useProfileQuery();
   const { data: addresses, isPending: isAddressesPending } = useAdressesQuery();
 
@@ -23,15 +23,19 @@ const Profile = () => {
     return (
       <>
         {/* <EditEmailModal /> */}
-        <ChangePasswordModal />
+        <ChangePasswordModal lang={lang} />
         <Link
-          href={'/dashboard/main'}
+          href={lang == 'fa' ? '/fa/dashboard/main' : '/dashboard/main'}
           className="md:hidden flex gap-1 items-center "
         >
           <SvgLongArrow20 />
-          Profile
+          {lang == 'fa' ? 'حساب کاربری' : 'Profile'}
         </Link>
-        <EditProfileForm addresses={addresses} profile={profile?.data} />
+        <EditProfileForm
+          lang={lang}
+          addresses={addresses}
+          profile={profile?.data}
+        />
       </>
     );
 };

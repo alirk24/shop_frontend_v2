@@ -9,7 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 import { useFiltersStore } from '../../store/filters.store';
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ lang = 'en' }) => {
   const categoriesList = useFiltersStore((s) => s.filters.categories);
   const subCategoriesList = useFiltersStore((s) => s.filters.subCategories);
   const subCategoriesSelected = useFiltersStore((s) => s.subCategory);
@@ -25,7 +25,9 @@ const CategoryFilter = () => {
 
   return (
     <AccordionItemFilter value="category">
-      <AccordionTriggerFilter>Category</AccordionTriggerFilter>
+      <AccordionTriggerFilter>
+        {lang == 'fa' ? 'دسته بندی' : 'Category'}
+      </AccordionTriggerFilter>
       <AccordionContentFilter className="flex flex-col gap-4 p-1 pb-4 text-sm md:text-base">
         {categoriesList.map((c) => (
           <>

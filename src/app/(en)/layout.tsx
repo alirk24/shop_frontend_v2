@@ -5,8 +5,9 @@ import 'swiper/swiper-bundle.css';
 import { Toaster } from '@/components/ui/toaster';
 import fonts from '@/fonts';
 
-import './globals.css';
-import { Providers } from './providers';
+// import fonts from '@/fonts/index';
+import '../globals.css';
+import { Providers } from '../providers';
 
 export const metadata: Metadata = {
   title: 'uspetinc',

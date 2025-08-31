@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  // baseURL: 'https://api.ark-24.ir',
   // headers: {
   //   'Access-Control-Allow-Origin': '*',
   //   'Access-Control-Allow-Methods': '*',
@@ -14,4 +15,5 @@ export const axiosInstance = axios.create({
 
 export const axiosBlog = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BLOG_BASE_URL,
+  // baseURL: 'https://api.ark-24.ir',
 });

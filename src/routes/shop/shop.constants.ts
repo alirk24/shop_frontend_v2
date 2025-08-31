@@ -1,4 +1,4 @@
 export const SORT_FILTERS = [
-  { value: 'price', name: 'cheapest' },
-  { value: '-price', name: 'expensive' },
+  { value: 'price', nameEn: 'cheapest', nameFa: 'ارزان‌ترین' },
+  { value: '-price', nameEn: 'expensive', nameFa: 'گران‌ترین' },
 ];

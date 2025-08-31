@@ -1,7 +1,7 @@
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-const WhyRelyItemsMobile = () => {
+const WhyRelyItemsMobile = ({ lang = 'en' }) => {
   return (
     <>
       <Swiper
@@ -26,7 +26,9 @@ const WhyRelyItemsMobile = () => {
               />
             </div>
             <p className="mt-4 font-black font-nunito md:text-lg">
-              Uncompromising quality assured
+              {lang == 'fa'
+                ? 'کیفیت تضمین شده و بدون افت کیفیت'
+                : 'Uncompromising quality assured'}
             </p>
           </div>
         </SwiperSlide>
@@ -39,7 +41,9 @@ const WhyRelyItemsMobile = () => {
               />
             </div>
             <p className="mt-4 font-black font-nunito md:text-lg">
-              Competitive prices, premium quality
+              {lang == 'fa'
+                ? 'قیمت‌های رقابتی، کیفیت درجه یک'
+                : 'Competitive prices, premium quality'}
             </p>
           </div>
         </SwiperSlide>
@@ -52,7 +56,9 @@ const WhyRelyItemsMobile = () => {
               />
             </div>
             <p className="mt-4 font-black font-nunito md:text-lg">
-              25+ years in pet supplies
+              {lang == 'fa'
+                ? '۲۵+ سال سابقه در زمینه لوازم حیوانات خانگی'
+                : '25+ years in pet supplies'}
             </p>
           </div>
         </SwiperSlide>
@@ -65,7 +71,7 @@ const WhyRelyItemsMobile = () => {
               />
             </div>
             <p className="mt-4 font-black font-nunito md:text-lg">
-              Top-tier materials only
+              {lang == 'fa' ? 'فقط مواد درجه یک' : 'Top-tier materials only'}
             </p>
           </div>
         </SwiperSlide>

@@ -11,7 +11,7 @@ import ProgressBar from '../cart/components/progressbar.component';
 import CheckoutMainForm from './components/checkout-main.form';
 import useAdressesQuery from './queries/addresses.query';
 
-const Checkout = () => {
+const Checkout = ({ lang = 'en' }) => {
   const router = useRouter();
 
   const { isPending, error } = useProfileQuery();
@@ -19,7 +19,7 @@ const Checkout = () => {
 
   useEffect(() => {
     if (!isPending && error && error.status === 401) {
-      router.replace('/login');
+      lang == 'fa' ? router.replace('/fa/login') : router.replace('/login');
     }
   }, [isPending, error]);
 
@@ -29,9 +29,9 @@ const Checkout = () => {
 
   return (
     <>
-      <ProgressBar active={2} />
-      <CheckoutMainForm address={data || []} />
-      <Footer />
+      <ProgressBar lang={lang} active={2} />
+      <CheckoutMainForm lang={lang} address={data || []} />
+      <Footer lang={lang} />
     </>
   );
 };

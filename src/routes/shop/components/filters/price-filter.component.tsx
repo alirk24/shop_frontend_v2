@@ -9,11 +9,11 @@ import { SliderDoubleRange } from '@/components/ui/slider-double-range';
 
 import { useFiltersStore } from '../../store/filters.store';
 
-const PriceFilter = () => {
+const PriceFilter = ({ lang = 'en' }) => {
   const price = useFiltersStore((s) => s.price);
   const setPrice = useFiltersStore((s) => s.setPrice);
 
-  const [minPrice, setMinPrice] = useState(price.min);
+  const [minPrice, setMinPrice] = useState(price.min || 0);
   const [maxPrice, setMaxPrice] = useState(price.max);
 
   useEffect(() => {
@@ -28,21 +28,32 @@ const PriceFilter = () => {
 
   return (
     <AccordionItemFilter value="price">
-      <AccordionTriggerFilter>Price range</AccordionTriggerFilter>
+      <AccordionTriggerFilter>
+        {lang == 'fa' ? 'بازه قیمت' : 'Price range'}
+      </AccordionTriggerFilter>
       <AccordionContentFilter>
         <SliderDoubleRange
-          min={1}
-          max={10000}
+          min={0}
+          max={100000000}
           value={[minPrice, maxPrice]}
           onValueChange={(values) => {
             setMinPrice(values[0]);
             setMaxPrice(values[1]);
           }}
           className="mt-2"
+          dir="rtl"
         />
         <div className="flex justify-between mt-3">
-          <p>${minPrice.toFixed(2)}</p>
-          <p>${maxPrice.toFixed(2)}</p>
+          <p>
+            {lang == 'fa' ? '' : '$'}
+            {minPrice.toFixed(2)}
+            {lang == 'fa' ? ' تومان' : ''}
+          </p>
+          <p>
+            {lang == 'fa' ? '' : '$'}
+            {maxPrice.toFixed(2)}
+            {lang == 'fa' ? ' تومان' : ''}
+          </p>
         </div>
       </AccordionContentFilter>
     </AccordionItemFilter>

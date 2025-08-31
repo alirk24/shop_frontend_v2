@@ -4,7 +4,7 @@ import React from 'react';
 import { Autoplay, FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Brand } from '@/app/(core)/shop/page';
+import { Brand } from '@/app/(en)/(core)/shop/page';
 
 const Slide = (props: { url: string }) => {
   return (
@@ -18,13 +18,13 @@ const Slide = (props: { url: string }) => {
   );
 };
 
-type HomeBrandsWeLoveProps = { brands: Brand[] };
+type HomeBrandsWeLoveProps = { brands: Brand[]; lang: string };
 
 const HomeBrandsWeLove = (props: HomeBrandsWeLoveProps) => {
   return (
     <section className="mt-16 md:mt-24">
       <p className="font-black font-nunito text-xl md:text-4xl text-center">
-        Brands We Love
+        {props.lang == 'fa' ? 'برندهایی که دوستشان داریم' : 'Brands We Love'}
       </p>
       <Swiper
         modules={[Autoplay, FreeMode]}

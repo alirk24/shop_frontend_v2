@@ -6,7 +6,7 @@ import { useDropzone } from 'react-dropzone';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { Brand, Category } from '@/app/(core)/shop/page';
+import { Brand, Category } from '@/app/(en)/(core)/shop/page';
 import SvgDelete32 from '@/assets/svg/Trash, Delete, Bin32.svg';
 import SvgEye32 from '@/assets/svg/eye32.svg';
 import Icon from '@/components/icon';

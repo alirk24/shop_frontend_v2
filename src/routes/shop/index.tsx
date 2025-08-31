@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-import { Brand, Category } from '@/app/(core)/shop/page';
+import { Brand, Category } from '@/app/(en)/(core)/shop/page';
 import Footer from '@/components/shared/footer.component';
 
 import { SubCategory } from '../admin/sub-categories/queries/admin-sub-categories.query';
@@ -19,9 +19,10 @@ type ShopProps = {
   categories: Category[];
   pets: Pet[];
   subCategories: SubCategory[];
+  lang: string;
 };
 
-const Shop = (props: ShopProps) => {
+const Shop = ({ lang = 'en', ...props }: ShopProps) => {
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
   const pet = searchParams.get('pet');
@@ -59,16 +60,16 @@ const Shop = (props: ShopProps) => {
 
   return (
     <>
-      <FilterModal />
-      <ShopBreadcrumb />
+      <FilterModal lang={lang} />
+      <ShopBreadcrumb lang={lang} />
       <p className="hidden md:block font-black font-nunito text-2xl px-20 mt-8">
-        Shop
+        {lang == 'fa' ? 'فروشگاه' : 'Shop'}
       </p>
       <div className="mt-6 md:grid md:grid-cols-12 md:gap-6 px-5 md:px-20">
-        <ShopFilter />
-        <ShopProducts />
+        <ShopFilter lang={lang} />
+        <ShopProducts lang={lang} />
       </div>
-      <Footer />
+      <Footer lang={lang} />
     </>
   );
 };

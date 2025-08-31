@@ -10,7 +10,7 @@ import { useFiltersStore } from '@/routes/shop/store/filters.store';
 
 import Filters from '../../filters/filters.component';
 
-const FilterModal = () => {
+const FilterModal = ({ lang = 'en' }) => {
   const isModalOpen = useFilterModalStore((s) => s.isModalOpen);
   const setIsModalOpen = useFilterModalStore((s) => s.setIsModalOpen);
 
@@ -36,9 +36,9 @@ const FilterModal = () => {
             className="flex items-center gap-3 font-bold"
           >
             <X className="w-4 h-4" />
-            Filters
+            {lang == 'fa' ? 'فیلترها' : 'Filters'}
           </div>
-          <Filters />
+          <Filters lang={lang} />
         </div>
         <div className="w-full flex gap-4 px-5 py-3 border-t border-nature-900">
           <Button
@@ -47,14 +47,14 @@ const FilterModal = () => {
             }}
             className="w-full rounded-lg text-sm font-semibold"
           >
-            View products
+            {lang == 'fa' ? 'مشاهده محصولات' : 'View products'}
           </Button>
           <Button
             className="w-full rounded-lg text-sm font-semibold"
             variant={'outline'}
             onClick={() => resetFilter()}
           >
-            Remove filter
+            {lang == 'fa' ? 'حذف فیلترها' : 'Remove filter'}
           </Button>
         </div>
       </DialogContent>

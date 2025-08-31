@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import SvgWeight from '@/assets/svg/weight-16.svg';
 import Icon from '@/components/icon';
 

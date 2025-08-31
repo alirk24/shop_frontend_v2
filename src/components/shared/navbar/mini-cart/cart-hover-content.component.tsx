@@ -8,7 +8,7 @@ import { useCartStore } from '@/store/cart.store';
 
 import NavbarProductCard from '../navbar-product-card.component';
 
-const CartHoverContent = () => {
+const CartHoverContent = ({ lang = 'en' }) => {
   const router = useRouter();
 
   const profile = useAuthStore((s) => s.profile);
@@ -22,23 +22,33 @@ const CartHoverContent = () => {
     <>
       <ul className="w-full max-h-[300px] overflow-y-auto no-scrollbar flex flex-col md:px-4 px-5 md:pt-4 pt-5 gap-5 md:gap-6">
         {cart.map((item) => (
-          <NavbarProductCard key={item.id} {...item} />
+          <NavbarProductCard key={item.id} {...item} lang={lang} />
         ))}
       </ul>
       <div className="flex justify-between mt-4 md:mt-6 text-sm md:text-base md:px-4 px-5">
-        <p>Discount:</p>
+        <p>{lang == 'fa' ? 'تخفیف:' : 'Discount:'}</p>
         <p className="text-error-500">
-          $ {totalDiscount.toFixed(2)} ({discountPercent.toFixed(2)}%)
+          {lang == 'fa' ? '' : '$'}
+          {totalDiscount.toFixed(2)}
+          {lang == 'fa' ? ' تومان' : ''} ({discountPercent.toFixed(2)}%)
         </p>
       </div>
       <div className="flex justify-between mt-2 md:mt-4 text-sm md:text-base md:px-4 px-5">
-        <p>Total:</p>
-        <p className="">$ {finalPrice.toFixed(2)}</p>
+        <p>{lang == 'fa' ? 'مجموع:' : 'Total:'}</p>
+        <p className="">
+          {lang == 'fa' ? '' : '$'}
+          {finalPrice.toFixed(2)}
+          {lang == 'fa' ? ' تومان' : ''}
+        </p>
       </div>
       <div className="mt-6 md:px-4 px-5 py-4 bg-nature-600 border-t border-nature-800">
         <div className="flex justify-between font-extrabold text-sm md:text-base">
-          <p>Subtotal:</p>
-          <p className="">$ {totalPrice.toFixed(2)}</p>
+          <p>{lang == 'fa' ? 'جمع جزئی:' : 'Subtotal:'}</p>
+          <p className="">
+            {lang == 'fa' ? '' : '$'}
+            {totalPrice.toFixed(2)}
+            {lang == 'fa' ? ' تومان' : ''}
+          </p>
         </div>
         <div className="flex gap-4 mt-5 md:mt-6">
           <Button
@@ -46,19 +56,24 @@ const CartHoverContent = () => {
             disabled={isLoading}
             variant={isLoading ? 'disabled' : 'default'}
             onClick={() => {
-              if (profile) router.push('/cart/checkout');
-              else router.push('/login');
+              if (profile) {
+                lang == 'fa'
+                  ? router.push('/fa/cart/checkout')
+                  : router.push('/cart/checkout');
+              } else {
+                lang == 'fa' ? router.push('/fa/login') : router.push('/login');
+              }
             }}
             className="w-full rounded-xl"
           >
-            Checkout
+            {lang == 'fa' ? 'تسویه حساب' : 'Checkout'}
           </Button>
-          <Link href={'/cart'} className="w-full">
+          <Link href={lang == 'fa' ? '/fa/cart/' : '/cart'} className="w-full">
             <Button
               variant={'outline'}
               className="w-full rounded-xl font-normal md:font-normal"
             >
-              View cart
+              {lang == 'fa' ? 'مشاهده سبد' : 'View cart'}
             </Button>
           </Link>
         </div>

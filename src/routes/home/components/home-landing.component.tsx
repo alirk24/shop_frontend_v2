@@ -13,7 +13,8 @@ import ShopSpecifications from '@/components/shared/shop-specifications.componen
 import { Button } from '@/components/ui/button';
 import UseWindowSize from '@/hooks/use-window-size.hook';
 
-const HomeLanding = () => {
+const HomeLanding = ({ lang = 'en' }) => {
+  console.log(lang);
   const router = useRouter();
   const { width } = UseWindowSize();
 
@@ -23,33 +24,35 @@ const HomeLanding = () => {
         <div className="flex flex-col md:flex-row md:justify-between w-full">
           <div className="flex flex-col md:mt-16">
             <h1 className="font-nunito font-extrabold text-lg md:text-[44px] md:leading-[50px]">
-              Welcome to{' '}
+              {lang == 'fa' ? 'به فروشگاه' : 'Welcome to'}{' '}
               <span className="font-black text-primary-500">
                 USPET SUPPLIES{' '}
               </span>
-              store.
+              {lang == 'fa' ? 'خوش آمدید.' : 'store.'}
             </h1>
             <div className="mt-3 md:mt-8 md:text-[40px] md:leading-10">
-              We provide the{' '}
+              {lang == 'fa' ? 'ما بهترین محصولات' : 'We provide the'}{' '}
               <Icon>
                 <SvgMiniPetMobile className="inline md:hidden -mt-2 md:mt-0 " />
                 <SvgMiniPetDesktop className="hidden md:inline" />
               </Icon>{' '}
-              best products {width && width > 1550 && <br />} for pets.
+              {lang == 'fa'
+                ? `را برای حیوانات خانگی ارائه می‌دهیم.`
+                : ` best products for pets.`}
             </div>
             <div className="flex gap-7 md:gap-8 mt-1 md:mt-4">
               <Button
                 onClick={() => {
-                  router.push('/shop');
+                  lang == 'fa' ? router.push('/fa/shop') : router.push('/shop');
                 }}
                 className="mt-5 md:mt-4 font-black font-nunito md:text-xl w-[158px] md:w-[225px] h-12 md:h-16 gap-1 md:gap-2 shadow-color-md md:shadow-color-xl"
               >
                 <Icon>
                   <SvgPetFingersMobile />
                 </Icon>
-                Show Store
+                {lang == 'fa' ? 'دیدن فروشگاه' : 'Show Store'}
               </Button>
-              <Icon>
+              <Icon className={lang == 'fa' ? '-rotate-180 ' : ''}>
                 <SvgCurvedArrowMobile className="md:hidden" />
                 <SvgCurvedArrowDesktop className="hidden md:block" />
               </Icon>
@@ -65,10 +68,12 @@ const HomeLanding = () => {
         </div>
         <div className="bg-nature-600 rounded-3xl w-full -mt-[35px] md:-mt-[95px] md:rounded-tr-none mx-5 pt-9 pb-6 px-4 md:px-8 md:py-8">
           <p className="font-nunito font-black text-xl md:text-4xl">
-            <span className="text-primary-500">Why </span>
-            rely on us?
+            <span className="text-primary-500">
+              {lang == 'fa' ? 'چرا ' : 'Why '}
+            </span>
+            {lang == 'fa' ? 'به ما اعتماد کنید؟' : 'rely on us?'}
           </p>
-          <ShopSpecifications className="mt-5 md:mt-8" />
+          <ShopSpecifications lang={lang} className="mt-5 md:mt-8" />
         </div>
       </div>
     </main>

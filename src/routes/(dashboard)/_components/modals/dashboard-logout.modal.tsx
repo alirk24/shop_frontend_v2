@@ -9,7 +9,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import useLogout from '../../_layouts/dashboard-sidebar/logout.mutation';
 import { useDashboardModalsStore } from '../../_store/dashboard-modals.store';
 
-const DashboardLogoutModal = () => {
+const DashboardLogoutModal = ({ lang = 'en' }) => {
   const { mutate, isPending } = useLogout();
 
   const isModalOpen = useDashboardModalsStore((s) => s.isLogoutModalOpen);
@@ -26,7 +26,9 @@ const DashboardLogoutModal = () => {
           <SvgLogout32 className="md:block hidden" />
         </Icon>
         <p className="font-nunito font-black md:text-lg mt-4">
-          Are you logging out?
+          {lang == 'fa'
+            ? 'آیا می‌خواهید از حساب کاربری خارج شوید؟'
+            : 'Are you logging out?'}
         </p>
         <div className="w-full flex gap-4 mt-6">
           <Button
@@ -34,7 +36,7 @@ const DashboardLogoutModal = () => {
             onClick={() => setIsModalOpen(false)}
             className="w-full rounded-xl font-normal md:font-normal text-sm md:text-base md:h-11"
           >
-            No
+            {lang == 'fa' ? 'خیر' : 'No'}
           </Button>
           <Button
             onClick={() => {
@@ -45,7 +47,7 @@ const DashboardLogoutModal = () => {
             variant={isPending ? 'disabled' : 'default'}
             className="w-full rounded-xl text-sm md:text-base md:h-11"
           >
-            Yes
+            {lang == 'fa' ? 'بله' : 'Yes'}
           </Button>
         </div>
       </DialogContent>

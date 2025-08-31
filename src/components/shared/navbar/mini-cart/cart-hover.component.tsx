@@ -20,7 +20,7 @@ import CartHoverContent from './cart-hover-content.component';
 import CartHoverEmptyContent from './cart-hover-empty-content.component';
 import CartHoverTrigger from './cart-hover-trigger.component';
 
-const CartButton = () => {
+const CartButton = ({ lang = 'en' }) => {
   const pathname = usePathname();
 
   const [isHoverOpen, setIsHoverOpen] = useState(false);
@@ -47,7 +47,9 @@ const CartButton = () => {
       <section
         className={cn(
           'hidden md:block',
-          pathname.startsWith('/cart') ? 'md:hidden' : '',
+          pathname.startsWith('/cart') || pathname.startsWith('/fa/cart')
+            ? 'md:hidden'
+            : '',
         )}
       >
         <HoverCard
@@ -63,8 +65,8 @@ const CartButton = () => {
 
           {/* for desktop */}
           <HoverCardContent className="flex flex-col bg-white md:mr-20 md:mt-7 md:rounded-2xl border-none w-full md:w-[483px] p-0 overflow-hidden">
-            {!isCartEmpty && <CartHoverContent />}
-            {isCartEmpty && <CartHoverEmptyContent />}
+            {!isCartEmpty && <CartHoverContent lang={lang} />}
+            {isCartEmpty && <CartHoverEmptyContent lang={lang} />}
           </HoverCardContent>
         </HoverCard>
       </section>
@@ -81,8 +83,8 @@ const CartButton = () => {
           </PopoverTrigger>
           {/* for mobile */}
           <PopoverContent className="md:hidden flex flex-col bg-white border-none w-screen p-0 overflow-hidden shadow-2xl mt-3">
-            {!isCartEmpty && <CartHoverContent />}
-            {isCartEmpty && <CartHoverEmptyContent />}
+            {!isCartEmpty && <CartHoverContent lang={lang} />}
+            {isCartEmpty && <CartHoverEmptyContent lang={lang} />}
           </PopoverContent>
         </Popover>
       </section>

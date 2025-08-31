@@ -12,6 +12,7 @@ import { AddressResponse } from '../queries/addresses.query';
 type CheckoutFormProps = {
   address: AddressResponse[];
   control: Control<CheckoutValidationType>;
+  lang: string;
 };
 
 const CheckoutForm = (props: CheckoutFormProps) => {
@@ -20,24 +21,28 @@ const CheckoutForm = (props: CheckoutFormProps) => {
   return (
     <main className="w-full md:col-span-8">
       <h1 className="font-nunito font-black text-lg md:text-2xl">
-        Billing Details
+        {props.lang == 'fa' ? 'جزئیات صورتحساب' : 'Billing Details'}
       </h1>
       <section className="flex flex-col gap-4 md:gap-8 mt-6 md:mt-7">
         <div className="flex flex-col md:flex-row gap-4 md:gap-6">
           <div className="flex flex-col gap-3 md:w-full">
             <label className="text-sm md:text-base text-text-200">
-              Full name
+              {props.lang == 'fa' ? 'نام و نام خانوادگی' : 'Full name'}
             </label>
             <Input disabled value={profile?.full_name} />
           </div>
           <div className="flex flex-col gap-3 md:w-full">
-            <label className="text-sm md:text-base text-text-200">Email</label>
+            <label className="text-sm md:text-base text-text-200">
+              {props.lang == 'fa' ? 'ایمیل' : 'Email'}
+            </label>
             <Input disabled value={profile?.email} />
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-4 md:gap-6">
           <div className="flex flex-col gap-3 md:w-full">
-            <label className="text-sm md:text-base">Country / Region *</label>
+            <label className="text-sm md:text-base">
+              {props.lang == 'fa' ? 'کشور / منطقه' : 'Country / Region'} *
+            </label>
             <Controller
               control={props.control}
               name="country"
@@ -47,7 +52,9 @@ const CheckoutForm = (props: CheckoutFormProps) => {
             />
           </div>
           <div className="flex flex-col gap-3 md:w-full">
-            <label className="text-sm md:text-base">County *</label>
+            <label className="text-sm md:text-base">
+              {props.lang == 'fa' ? 'کشور' : 'Country'} *
+            </label>
             <Controller
               control={props.control}
               name="county"
@@ -59,7 +66,9 @@ const CheckoutForm = (props: CheckoutFormProps) => {
         </div>
         <div className="flex flex-col md:flex-row gap-4 md:gap-6">
           <div className="flex flex-col gap-3 md:w-full">
-            <label className="text-sm md:text-base">Street address *</label>
+            <label className="text-sm md:text-base">
+              {props.lang == 'fa' ? 'آدرس' : 'Street address'} *
+            </label>
             <Controller
               control={props.control}
               name="street"
@@ -69,7 +78,9 @@ const CheckoutForm = (props: CheckoutFormProps) => {
             />
           </div>
           <div className="flex flex-col gap-3 md:w-full">
-            <label className="text-sm md:text-base">Town / City *</label>
+            <label className="text-sm md:text-base">
+              {props.lang == 'fa' ? 'استان / شهر' : 'Town / City'} *
+            </label>
             <Controller
               control={props.control}
               name="city"
@@ -81,7 +92,9 @@ const CheckoutForm = (props: CheckoutFormProps) => {
         </div>
         <div className="flex flex-col md:flex-row gap-4 md:gap-6">
           <div className="flex flex-col gap-3 md:w-full">
-            <label className="text-sm md:text-base">Postcode *</label>
+            <label className="text-sm md:text-base">
+              {props.lang == 'fa' ? 'کد پستی' : 'Postcode'} *
+            </label>
             <Controller
               control={props.control}
               name="postCode"
@@ -96,7 +109,9 @@ const CheckoutForm = (props: CheckoutFormProps) => {
             />
           </div>
           <div className="flex flex-col gap-3 md:w-full">
-            <label className="text-sm md:text-base">Phone *</label>
+            <label className="text-sm md:text-base">
+              {props.lang == 'fa' ? 'شماره تلفن' : 'Phone'} *
+            </label>
             <Controller
               control={props.control}
               name="phone"
@@ -114,7 +129,9 @@ const CheckoutForm = (props: CheckoutFormProps) => {
         <div className="flex flex-col md:flex-row gap-4 md:gap-6">
           <div className="flex flex-col gap-3 md:w-full">
             <label className="text-sm md:text-base">
-              Order Notes (optional)
+              {props.lang == 'fa'
+                ? 'یادداشت‌های سفارش (اختیاری)'
+                : 'Order Notes (optional)'}
             </label>
             <Controller
               control={props.control}

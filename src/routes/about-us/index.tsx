@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Brand } from '@/app/(core)/shop/page';
+import { Brand } from '@/app/(en)/(core)/shop/page';
 import Footer from '@/components/shared/footer.component';
 import { axiosInstance } from '@/lib/constants/axios';
 
@@ -12,19 +12,19 @@ import AboutUsInfo from './components/about-us-info.component';
 import AboutUsWhatWeProvide from './components/about-us-what-we-provide.component';
 import AboutUsWhy from './components/why-rely/about-us-why.component';
 
-const AboutUs = async () => {
+const AboutUs = async ({ lang = 'en' }) => {
   const brands = await getData();
 
   return (
     <>
-      <AboutUsHero />
-      <HomeBrandsWeLove brands={brands} />
-      <AboutUsInfo />
-      <AboutUsWhatWeProvide />
-      <AboutusFounder />
-      <AboutUsGallery />
-      <AboutUsWhy />
-      <Footer />
+      <AboutUsHero lang={lang} />
+      <HomeBrandsWeLove lang={lang} brands={brands} />
+      <AboutUsInfo lang={lang} />
+      <AboutUsWhatWeProvide lang={lang} />
+      <AboutusFounder lang={lang} />
+      <AboutUsGallery lang={lang} />
+      <AboutUsWhy lang={lang} />
+      <Footer lang={lang} />
     </>
   );
 };

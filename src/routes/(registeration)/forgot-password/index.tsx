@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 
 import ForgotPasswordForm from './forgot-password.form';
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ lang = 'en' }) => {
   const router = useRouter();
 
   return (
@@ -23,19 +23,22 @@ const ForgotPassword = () => {
           <SvgLogoDesktop className="hidden md:block" />
         </Icon>
         <h3 className="mt-6 md:mt-7 font-nunito font-extrabold md:text-2xl">
-          Reset your password
+          {lang == 'fa'
+            ? 'رمز عبور خود را بازنشانی کنید'
+            : 'Reset your password'}
         </h3>
         <p className="mt-2 md:mt-3 text-sm md:text-base text-center leading-7 md:leading-8">
-          After entering your email, a message will be sent to you to change
-          your password.
+          {lang == 'fa'
+            ? 'پس از وارد کردن ایمیل، پیامی برای تغییر رمز عبور برای شما ارسال می‌شود.'
+            : 'After entering your email, a message will be sent to you to change your password.'}
         </p>
 
-        <ForgotPasswordForm />
+        <ForgotPasswordForm lang={lang} />
         <Link
-          href={'/login'}
+          href={lang == 'fa' ? '/fa/login' : '/login'}
           className="w-full mt-4 md:mt-6 text-sm md:text-base text-center cursor-pointer"
         >
-          Back
+          {lang == 'fa' ? 'بازگشت' : 'Back'}
         </Link>
       </section>
     </main>

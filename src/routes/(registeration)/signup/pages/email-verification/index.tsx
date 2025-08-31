@@ -12,7 +12,7 @@ import { useRegisterStore } from '@/routes/(registeration)/_store/register.store
 import EmailVerificationForm from './email-verification.form';
 import useResendCode from './resend-code.mutation';
 
-const EmailVerification = () => {
+const EmailVerification = ({ lang = 'en' }) => {
   const [timer, setTimer] = useState(120);
 
   const email = useRegisterStore((s) => s.signupEmail);
@@ -48,13 +48,15 @@ const EmailVerification = () => {
           <SvgLogoDesktop className="hidden md:block" />
         </Icon>
         <h3 className="mt-6 md:mt-7 font-nunito font-extrabold md:text-2xl">
-          Email verification
+          {lang == 'fa' ? 'تایید ایمیل' : 'Email verification'}
         </h3>
         <p className="mt-2 md:mt-3 text-sm md:text-base text-center leading-7 md:leading-8">
-          Please enter the 5-digit verification code that was sent to {email}
+          {lang == 'fa'
+            ? `کد 5 رقمی ارسال شده به ایمیل ${email} را وارد نمایید`
+            : `Please enter the 5-digit verification code that was sent to ${email}`}
         </p>
 
-        <EmailVerificationForm />
+        <EmailVerificationForm lang={lang} />
 
         <p
           className={cn(
@@ -67,7 +69,7 @@ const EmailVerification = () => {
             }
           }}
         >
-          Resend the Code{' '}
+          {lang == 'fa' ? 'ارسال مجدد کد' : 'Resend the Code'}{' '}
           {!!timer && '(' + convertSecondsToMinutes(timer) + ')'}
         </p>
         <p
@@ -76,7 +78,7 @@ const EmailVerification = () => {
           }}
           className="w-full mt-4 md:mt-6 text-sm md:text-base text-center cursor-pointer"
         >
-          Back
+          {lang == 'fa' ? 'بازگشت' : 'Back'}
         </p>
       </section>
     </main>

@@ -9,14 +9,16 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 import { useFiltersStore } from '../../store/filters.store';
 
-const PetFilter = () => {
+const PetFilter = ({ lang = 'en' }) => {
   const petsList = useFiltersStore((s) => s.filters.pets);
   const petsSelected = useFiltersStore((s) => s.pet);
   const setPet = useFiltersStore((s) => s.setPet);
 
   return (
     <AccordionItemFilter value="pet">
-      <AccordionTriggerFilter>Pet</AccordionTriggerFilter>
+      <AccordionTriggerFilter>
+        {lang == 'fa' ? 'حیوان خانگی' : 'Pet'}
+      </AccordionTriggerFilter>
       <AccordionContentFilter className="flex flex-col gap-4 p-1 pb-4 text-sm md:text-base">
         {petsList.map((c) => (
           <label

@@ -6,14 +6,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import AboutUsGalleryCard from './cards/about-us-gallery-card.component';
 
-const AboutUsGallery = () => {
+const AboutUsGallery = ({ lang = 'en' }) => {
   return (
     <main className="mt-16 md:mt-24">
       <p className="font-nunito font-bold text-xl md:text-[32px] text-center">
-        Image Gallery
+        {lang == 'fa' ? 'گالری تصاویر' : 'Image Gallery'}
       </p>
       <p className="mt-2 md:mt-3 text-center md:text-lg">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        {lang == 'fa'
+          ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
       </p>
 
       <Swiper

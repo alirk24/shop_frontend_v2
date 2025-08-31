@@ -10,6 +10,7 @@ import useSearchQuery from './search.query';
 
 type SearchPopoverProps = {
   onClose?: () => void;
+  lang: string;
 };
 
 const SearchPopover = (props: SearchPopoverProps) => {
@@ -23,7 +24,7 @@ const SearchPopover = (props: SearchPopoverProps) => {
 
   return (
     <div
-      dir="ltr"
+      dir={props.lang == 'fa' ? 'rtl' : 'ltr'}
       className="absolute top-0 pt-5 z-[1000] overflow-y-auto bg-transparent "
     >
       <div className="hidden md:flex items-center w-[291px] h-[54px] bg-nature-600 rounded-2xl px-3">
@@ -41,7 +42,9 @@ const SearchPopover = (props: SearchPopoverProps) => {
           onChange={(e) => {
             setSearch(e.target.value);
           }}
-          placeholder="Search product..."
+          placeholder={
+            props.lang == 'fa' ? 'جستجو کالا ...' : 'Search product...'
+          }
           className="bg-transparent placeholder:text-text-200 font-nunito border-none text-base"
         />
       </div>
@@ -52,19 +55,28 @@ const SearchPopover = (props: SearchPopoverProps) => {
         )}
         {search.length < 3 && (
           <p className="text-center text-text-300 font-semibold text-sm">
-            Type what you looking for?
+            {props.lang == 'fa'
+              ? 'کلمه مدنظر را وارد نمایید'
+              : 'Type what you looking for?'}
           </p>
         )}
         {search.length >= 3 && !isPending && data?.length === 0 && (
           <p className="text-center text-text-300 font-semibold text-sm">
-            Nothing found
+            {props.lang == 'fa' ? 'موردی پیدا نشد' : 'Nothing found'}
           </p>
         )}
         {search.length >= 3 &&
           !isPending &&
           data &&
           products.map((item, index) => (
-            <Link key={item.id} href={`/product/${item.id}`}>
+            <Link
+              key={item.id}
+              href={
+                props.lang == 'fa'
+                  ? `fa/product/${item.id}`
+                  : `/product/${item.id}`
+              }
+            >
               <li
                 className={cn(
                   '',

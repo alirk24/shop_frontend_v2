@@ -5,12 +5,12 @@ import Footer from '@/components/shared/footer.component';
 import ProgressBar from '../cart/components/progressbar.component';
 import OrderCompleteDetails from './components/order-complete-details.component';
 
-const OrderComplete = () => {
+const OrderComplete = ({ lang = 'en' }) => {
   return (
     <>
-      <ProgressBar active={3} />
-      <OrderCompleteDetails />
-      <Footer />
+      <ProgressBar lang={lang} active={3} />
+      <OrderCompleteDetails lang={lang} />
+      <Footer lang={lang} />
     </>
   );
 };

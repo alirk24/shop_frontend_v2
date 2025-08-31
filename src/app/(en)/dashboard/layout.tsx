@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  return <DashboardLayout>{children}</DashboardLayout>;
+  return <DashboardLayout lang="en">{children}</DashboardLayout>;
 };
 
 export default Layout;

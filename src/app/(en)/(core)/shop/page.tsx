@@ -29,6 +29,7 @@ const page = async () => {
 
   return (
     <Shop
+      lang="en"
       brands={brands}
       categories={categories}
       pets={pets}

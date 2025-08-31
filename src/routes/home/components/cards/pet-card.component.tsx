@@ -8,6 +8,7 @@ type Props = {
   pet: Pet;
   totalLength: number;
   index: number;
+  lang: string;
 };
 
 const PetCard = (props: Props) => {
@@ -16,7 +17,9 @@ const PetCard = (props: Props) => {
   return (
     <div
       onClick={() => {
-        router.push(`/shop?pet=${props.pet.id}`);
+        props.lang == 'fa'
+          ? router.push(`/fa/shop?pet=${props.pet.id}`)
+          : router.push(`/shop?pet=${props.pet.id}`);
       }}
       className={cn(
         'flex flex-col items-center gap-3 md:gap-6 cursor-pointer',

@@ -21,6 +21,7 @@ type Props = {
   description: string;
   price: number;
   priceWithDiscount: number;
+  lang: string;
 };
 
 const SavedProductCard = (props: Props) => {
@@ -67,7 +68,8 @@ const SavedProductCard = (props: Props) => {
         <Icon className="flex md:items-center gap-1 text-sm md:text-base font-bold">
           <SvgWeight className="md:hidden w-5 h-5" />
           <SvgWeightDesktop className="hidden md:block" />
-          {props.weight}KG
+          {props.weight}
+          {props.lang == 'fa' ? ` کیلوگرم` : `KG`}
         </Icon>
       </div>
       <p className="text-sm md:text-base mt-3 leading-[26px] md:leading-7">
@@ -81,15 +83,22 @@ const SavedProductCard = (props: Props) => {
         </p>
         {!!props.discount && (
           <p className="text-text-300 line-through decoration-text-300 text-sm md:text-base">
-            ${props.price.toFixed(2)}
+            {props.lang == 'fa' ? '' : '$'}
+            {props.price.toFixed(2)}
+            {props.lang == 'fa' ? ' تومان' : ''}
           </p>
         )}
       </div>
       <Link
-        href={`/product/${props.id}`}
+        href={
+          props.lang == 'fa'
+            ? `/fa/product/${props.id}`
+            : `/product/${props.id}`
+        }
         className="mt-4 md:mt-6 flex justify-end gap-1 text-sm md:text-base text-primary-500"
       >
-        View product
+        {props.lang == 'fa' ? `مشاهده محصول` : `View product`}
+
         <SvgLongArrowRed20 />
       </Link>
     </div>

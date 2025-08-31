@@ -2,17 +2,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 
 type TopSellingProductCardProps = Pick<
   Product,
   'name' | 'price_after_promotion' | 'description' | 'image_urls' | 'id'
->;
+> & { lang: string };
 
 const TopSellingProductCard = (props: TopSellingProductCardProps) => {
   return (
     <Link
-      href={`/product/${props.id}`}
+      href={
+        props.lang == 'fa' ? `/fa/product/${props.id}` : `/product/${props.id}`
+      }
       className="flex flex-col items-center rounded-xl md:rounded-3xl bg-[#FAFAFA] p-4 md:p-6 md:h-full md:min-w-[285px]"
     >
       <img
@@ -24,7 +26,9 @@ const TopSellingProductCard = (props: TopSellingProductCardProps) => {
         {props.description}
       </p>
       <p className="font-extrabold text-primary-500 md:text-xl md:mt-3">
-        ${props.price_after_promotion}
+        {props.lang == 'fa' ? '' : '$'}
+        {props.price_after_promotion}
+        {props.lang == 'fa' ? ' تومان' : ''}
       </p>
     </Link>
   );

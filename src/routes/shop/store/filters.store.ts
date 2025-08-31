@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { Brand, Category } from '@/app/(core)/shop/page';
+import { Brand, Category } from '@/app/(en)/(core)/shop/page';
 import { SubCategory } from '@/routes/admin/sub-categories/queries/admin-sub-categories.query';
 import { Pet } from '@/routes/home';
 
@@ -57,13 +57,13 @@ export const useFiltersStore = create<UseFilterStore>()((set, get) => ({
       category: [],
       pet: [],
       subCategory: [],
-      price: { max: 10000, min: 1 },
+      price: { max: 100000000, min: 0 },
       search: '',
       sortBy: undefined,
     });
   },
 
-  price: { min: 1, max: 10000 },
+  price: { min: 0, max: 100000000 },
   setPrice(price) {
     set({ price });
   },

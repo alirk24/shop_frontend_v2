@@ -4,13 +4,14 @@ import Link from 'next/link';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import { Button } from '@/components/ui/button';
 
 import StandardProductCard from './cards/standard-product-card.component';
 
 type HomeTopCategoriesProps = {
   products: Product[];
+  lang: string;
 };
 
 const HomeTopCategories = (props: HomeTopCategoriesProps) => {
@@ -20,7 +21,9 @@ const HomeTopCategories = (props: HomeTopCategoriesProps) => {
     <>
       <section className="mt-12 md:mt-24">
         <h3 className="text-xl md:text-4xl font-nunito font-black text-center">
-          Top Categories & Food products
+          {props.lang == 'fa'
+            ? 'دسته‌بندی‌های برتر و محصولات غذایی'
+            : 'Top Categories & Food products'}
         </h3>
       </section>
       <Swiper
@@ -30,7 +33,7 @@ const HomeTopCategories = (props: HomeTopCategoriesProps) => {
       >
         {props.products.map((item) => (
           <SwiperSlide key={item.id}>
-            <StandardProductCard {...item} />
+            <StandardProductCard {...item} lang={props.lang} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -50,7 +53,7 @@ const HomeTopCategories = (props: HomeTopCategoriesProps) => {
       >
         {props.products.map((item) => (
           <SwiperSlide key={item.id}>
-            <StandardProductCard {...item} />
+            <StandardProductCard {...item} lang={props.lang} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -58,9 +61,9 @@ const HomeTopCategories = (props: HomeTopCategoriesProps) => {
         <div className="categories-pagination"></div>
       </div>
       <div className="flex justify-center">
-        <Link href="/shop">
+        <Link href={props.lang == 'fa' ? '/fa/shop' : '/shop'}>
           <Button className="mt-6 md:mt-10 font-black font-nunito w-[225px] h-[48px] md:h-16 md:text-xl shadow-color-md md:shadow-color-xl">
-            Show more
+            {props.lang == 'fa' ? 'مشاهده بیشتر' : 'Show more'}
           </Button>
         </Link>
       </div>

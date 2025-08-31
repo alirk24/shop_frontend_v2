@@ -20,6 +20,7 @@ import OrderDetails from './order-details.component';
 
 type CheckoutMainFormProps = {
   address: AddressResponse[];
+  lang: string;
 };
 
 const CheckoutMainForm = (props: CheckoutMainFormProps) => {
@@ -69,11 +70,19 @@ const CheckoutMainForm = (props: CheckoutMainFormProps) => {
       clearCart();
       queryClient.clear();
 
-      router.push(
-        `/cart/order-complete?order-id=${createOrderResponse.data.id}`,
-      );
+      props.lang == 'fa'
+        ? router.push(
+            `/fa/cart/order-complete?order-id=${createOrderResponse.data.id}`,
+          )
+        : router.push(
+            `/cart/order-complete?order-id=${createOrderResponse.data.id}`,
+          );
     } catch (err: any) {
-      toast.error(err.response.data?.message || 'Oops, something went wrong!');
+      toast.error(
+        err.response.data?.message || props.lang == 'fa'
+          ? 'درحال حاضر مشکلی به وحود آمده است!'
+          : 'Oops, something went wrong!',
+      );
     } finally {
       setIsLoading(false);
     }
@@ -84,8 +93,12 @@ const CheckoutMainForm = (props: CheckoutMainFormProps) => {
       onSubmit={handleSubmit(submitHandler)}
       className="flex flex-col gap-6  md:grid md:grid-cols-12 px-5 md:px-20 mt-10 md:mt-16"
     >
-      <CheckoutForm address={props.address} control={control} />
-      <OrderDetails isLoading={isLoading} />
+      <CheckoutForm
+        lang={props.lang}
+        address={props.address}
+        control={control}
+      />
+      <OrderDetails lang={props.lang} isLoading={isLoading} />
     </form>
   );
 };

@@ -56,7 +56,7 @@ export const generateMetadata = async ({
 const page = async (props: { params: { productId: string } }) => {
   const data = await getSingleProduct(props.params.productId);
 
-  return <ProductDetails product={data} />;
+  return <ProductDetails lang="fa" product={data} />;
 };
 
 async function getSingleProduct(productId: string) {

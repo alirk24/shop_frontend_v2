@@ -38,7 +38,7 @@ const WEIGHTS = [
   },
 ] as const;
 
-type ProductDetailsSectionProps = ProductWildCardProps;
+type ProductDetailsSectionProps = ProductWildCardProps & { lang: string };
 
 const ProductDetailsSection = (props: ProductDetailsSectionProps) => {
   const profile = useAuthStore((s) => s.profile);
@@ -77,7 +77,10 @@ const ProductDetailsSection = (props: ProductDetailsSectionProps) => {
     <section className="flex flex-col mt-6 md:mt-0 md:w-full md:col-span-6">
       {!!props.activePromotions && (
         <div className="hidden md:block">
-          <OfferCard activePromotions={props.activePromotions} />
+          <OfferCard
+            lang={props.lang}
+            activePromotions={props.activePromotions}
+          />
         </div>
       )}
       <h1 className="font-nunito font-black text-lg md:text-[32px] md:leading-9 md:mt-6">
@@ -85,7 +88,7 @@ const ProductDetailsSection = (props: ProductDetailsSectionProps) => {
       </h1>
       <p className="text-sm mt-1 md:mt-3 md:text-lg">{props.description}</p>
       <p className="mt-4 md:mt-9 font-nunito font-bold text-sm md:text-lg">
-        Select weight
+        {props.lang == 'fa' ? 'وزن انتخابی' : 'Select weight'}
       </p>
       <ul className="flex gap-3 md:gap-4 mt-3 overflow-x-auto no-scrollbar">
         {WEIGHTS.map((item) => (
@@ -116,18 +119,23 @@ const ProductDetailsSection = (props: ProductDetailsSectionProps) => {
                 </>
               )}
             </Icon>
-            {item.weight}KG
+            {item.weight}
+            {props.lang == 'fa' ? ' کیلوگرم' : 'KG'}
           </li>
         ))}
       </ul>
       <div className="flex justify-between mt-6 md:mt-8">
         <div className="flex items-center gap-3">
           <p className="text-xl md:text-[32px] font-bold">
-            ${props.priceWithDiscount.toFixed(2)}
+            {props.lang == 'fa' ? '' : '$'}
+            {props.priceWithDiscount.toFixed(2)}
+            {props.lang == 'fa' ? ' تومان' : ''}
           </p>
           {props.price > props.priceWithDiscount && (
             <p className="text-text-300 line-through decoration-text-300 md:text-xl">
-              ${props.price.toFixed(2)}
+              {props.lang == 'fa' ? '' : '$'}
+              {props.price.toFixed(2)}
+              {props.lang == 'fa' ? ' تومان' : ''}
             </p>
           )}
         </div>
@@ -151,32 +159,48 @@ const ProductDetailsSection = (props: ProductDetailsSectionProps) => {
           isLoading={isProfileLoading}
           className="font-bold text-sm w-full rounded-lg md:h-16 md:rounded-2xl shadow-color-md"
         >
-          Add to cart
+          {props.lang == 'fa' ? 'اضافه کردن به سبد' : 'Add to cart'}
         </Button>
       </div>
 
       <Accordion1 type="single" collapsible className="w-full mt-8 md:mt-3">
         <AccordionItem1 value="details">
-          <AccordionTrigger1>Details</AccordionTrigger1>
+          <AccordionTrigger1>
+            {props.lang == 'fa' ? 'جزئیات' : 'Details'}
+          </AccordionTrigger1>
           <AccordionContent1>
             <p className="whitespace-pre-line font-opensans">
-              {props.features || 'Nothing to show'}
+              {props.features || props.lang == 'fa'
+                ? 'موردی یافت نشد'
+                : 'Nothing to show'}
             </p>
           </AccordionContent1>
         </AccordionItem1>
         <AccordionItem1 value="detaiIngredients & Analysisls">
-          <AccordionTrigger1>Ingredients & Analysis</AccordionTrigger1>
+          <AccordionTrigger1>
+            {' '}
+            {props.lang == 'fa'
+              ? 'مواد تشکیل دهنده و آنالیز'
+              : 'Ingredients & Analysis'}
+          </AccordionTrigger1>
           <AccordionContent1>
             <p className="whitespace-pre-line font-opensans">
-              {props.IngredientsAnalysis || 'Nothing to show'}
+              {props.IngredientsAnalysis || props.lang == 'fa'
+                ? 'موردی یافت نشد'
+                : 'Nothing to show'}
             </p>
           </AccordionContent1>
         </AccordionItem1>
         <AccordionItem1 className="border-none" value="Shipping & Returns">
-          <AccordionTrigger1>Shipping & Returns</AccordionTrigger1>
+          <AccordionTrigger1>
+            {' '}
+            {props.lang == 'fa' ? 'ارسال و مرجوعی' : 'Shipping & Returns'}
+          </AccordionTrigger1>
           <AccordionContent1>
             <p className="whitespace-pre-line font-opensans">
-              {props.ShippingReturns || 'Nothing to show'}
+              {props.ShippingReturns || props.lang == 'fa'
+                ? 'موردی یافت نشد'
+                : 'Nothing to show'}
             </p>
           </AccordionContent1>
         </AccordionItem1>

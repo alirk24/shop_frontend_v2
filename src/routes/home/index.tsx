@@ -1,6 +1,6 @@
-import { Product } from '@/app/(core)/product/[productId]/page';
-import { Brand, Category } from '@/app/(core)/shop/page';
-import { axiosBlog, axiosInstance } from '@/lib/constants/axios';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
+import { Brand, Category } from '@/app/(en)/(core)/shop/page';
+import { axiosInstance } from '@/lib/constants/axios';
 
 import Footer from '../../components/shared/footer.component';
 import Banners1 from './components/banners-1.component';
@@ -13,14 +13,14 @@ import HomeLanding from './components/home-landing.component';
 import HomeOurPromise from './components/home-our-promise.component';
 import HomePets from './components/home-pets.component';
 import HomeSuperSale from './components/home-super-sale.component';
-import HomeBlog from './components/home-tips.component';
+// import HomeBlog from './components/home-tips.component';
 import HomeTopCategories from './components/home-top-categories.component';
 import HomeTopSellingProducts from './components/home-top-selling-products.component';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-const Home = async () => {
+const Home = async ({ lang = 'en' }) => {
   const [
     bestSelling,
     brands,
@@ -29,25 +29,25 @@ const Home = async () => {
     topCategories,
     pets,
     banners,
-    blog,
+    // blog,
   ] = await getHomePageData();
 
   return (
     <>
-      <HomeLanding />
-      <HomeTopCategories products={topCategories} />
-      <HomePets pets={pets} />
+      <HomeLanding lang={lang} />
+      <HomeTopCategories lang={lang} products={topCategories} />
+      <HomePets lang={lang} pets={pets} />
       <Banners1 banners={banners} />
-      <HomeSuperSale products={onSales} />
-      <HomeCategories categories={categories} />
-      <HomeTopSellingProducts products={bestSelling} />
+      <HomeSuperSale lang={lang} products={onSales} />
+      <HomeCategories lang={lang} categories={categories} />
+      <HomeTopSellingProducts lang={lang} products={bestSelling} />
       <Banners2 banners={banners} />
-      <HomeOurPromise />
-      <HomeBrandsWeLove brands={brands} />
-      <HomeFAQ />
-      <HomeBlog blog={blog} />
-      <HomeAchievements />
-      <Footer />
+      <HomeOurPromise lang={lang} />
+      <HomeBrandsWeLove lang={lang} brands={brands} />
+      <HomeFAQ lang={lang} />
+      {/* <HomeBlog blog={blog} /> */}
+      <HomeAchievements lang={lang} />
+      <Footer lang={lang} />
     </>
   );
 };
@@ -97,13 +97,13 @@ async function getHomePageData() {
     axiosInstance
       .get<Banner[]>('/shop/api/v1/homepage/banners/')
       .then((res) => res.data),
-    axiosBlog
-      .get<Blog[]>('/blog/wp-json/uspet/v1/posts')
-      .then((res) => res.data),
+    // axiosBlog
+    //   .get<Blog[]>('/blog/wp-json/uspet/v1/posts')
+    //   .then((res) => res.data),
   ]);
 
   const rejectedIndex = results.findIndex((r) => r.status === 'rejected');
-
+  console.log(results);
   if (rejectedIndex !== -1) {
     throw new Error('Something went wrong!');
   }
@@ -119,7 +119,7 @@ async function getHomePageData() {
     fulfilledResults[4].value,
     fulfilledResults[5].value,
     fulfilledResults[6].value,
-    fulfilledResults[7].value,
+    // fulfilledResults[7].value,
   ] as [
     Product[],
     Brand[],
@@ -128,7 +128,7 @@ async function getHomePageData() {
     Product[],
     Pet[],
     Banner[],
-    Blog[],
+    // Blog[],
   ];
 }
 

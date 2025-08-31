@@ -10,6 +10,7 @@ type ImageShowcaseProps = {
   images: string[];
   discount: number;
   hasActivePromotion: boolean;
+  lang: string;
 };
 
 const ImagesShowcase = (props: ImageShowcaseProps) => {
@@ -22,7 +23,9 @@ const ImagesShowcase = (props: ImageShowcaseProps) => {
         props.hasActivePromotion ? 'md:mt-[73px]' : '',
       )}
     >
-      <ul className="flex flex-col pr-5 md:pr-14 gap-2 md:gap-6 max-h-[248px] md:max-h-[600px] overflow-y-auto no-scrollbar">
+      <ul
+        className={`flex flex-col ${props.lang == 'fa' ? ' pl-5 md:pl-14 ' : ' pr-5 md:pr-14 '} gap-2 md:gap-6 max-h-[248px] md:max-h-[600px] overflow-y-auto no-scrollbar`}
+      >
         {props.images.map((i) => (
           <li
             key={i}

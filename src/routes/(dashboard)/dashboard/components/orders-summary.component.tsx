@@ -9,6 +9,7 @@ import { OrderSummaryType } from '../dashboard.query';
 
 type OrderSummaryProps = {
   summary: OrderSummaryType;
+  lang: string;
 };
 
 const OrdersSummary = (props: OrderSummaryProps) => {
@@ -21,10 +22,10 @@ const OrdersSummary = (props: OrderSummaryProps) => {
         <div>
           <p className="text-center md:text-left text-sm md:text-base">
             {(props.summary?.pending || 0) + (props.summary?.shipped || 0)}{' '}
-            Order
+            {props.lang == 'fa' ? 'سفارش' : 'Order'}
           </p>
           <p className="text-center md:text-left text-sm md:text-base font-bold mt-2">
-            In Progress
+            {props.lang == 'fa' ? 'درحال پردازش' : 'In Progress'}
           </p>
         </div>
       </div>
@@ -34,10 +35,11 @@ const OrdersSummary = (props: OrderSummaryProps) => {
         </Icon>
         <div>
           <p className="text-center md:text-left text-sm md:text-base">
-            {props.summary?.delivered || 0} Order
+            {props.summary?.delivered || 0}{' '}
+            {props.lang == 'fa' ? 'سفارش' : 'Order'}
           </p>
           <p className="text-center md:text-left text-sm md:text-base font-bold mt-2">
-            Delivered
+            {props.lang == 'fa' ? 'ارسال شده' : 'Delivered'}
           </p>
         </div>
       </div>
@@ -47,10 +49,11 @@ const OrdersSummary = (props: OrderSummaryProps) => {
         </Icon>
         <div>
           <p className="text-center md:text-left text-sm md:text-base">
-            {props.summary?.cancelled || 0} Order
+            {props.summary?.cancelled || 0}{' '}
+            {props.lang == 'fa' ? 'سفارش' : 'Order'}
           </p>
           <p className="text-center md:text-left text-sm md:text-base font-bold mt-2">
-            Canceled
+            {props.lang == 'fa' ? 'لغو شده' : 'Canceled'}
           </p>
         </div>
       </div>

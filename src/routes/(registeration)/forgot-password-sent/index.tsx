@@ -14,7 +14,7 @@ import convertSecondsToMinutes from '@/lib/utils/convertSecondsToMinutes';
 import { useRegisterStore } from '../_store/register.store';
 import useForgotPasswordMutation from '../forgot-password/forgot-password.mutation';
 
-const ForgotPasswordSent = () => {
+const ForgotPasswordSent = ({ lang = 'en' }) => {
   const router = useRouter();
 
   const [timer, setTimer] = useState(120);
@@ -60,16 +60,19 @@ const ForgotPasswordSent = () => {
           <SvgLogoDesktop className="hidden md:block" />
         </Icon>
         <h3 className="mt-6 md:mt-7 font-nunito font-extrabold md:text-2xl">
-          The message was sent successfully
+          {lang == 'fa'
+            ? 'پیام با موفقیت ارسال شد'
+            : 'The message was sent successfully'}
         </h3>
         <p className="mt-2 md:mt-3 text-sm md:text-base text-center">
-          A password change message has been sent to your email. Check your
-          email
+          {lang == 'fa'
+            ? 'پیام تغییر رمز عبور به ایمیل شما ارسال شد. ایمیل خود را بررسی کنید'
+            : 'A password change message has been sent to your email. Check your email'}
         </p>
 
-        <Link href="/login" className="w-full">
+        <Link href={lang == 'fa' ? '/fa/login' : '/login'} className="w-full">
           <Button className="w-full font-bold text-sm md:text-base shadow-color-md rounded-xl mt-6 md:mt-8">
-            Back to sign in
+            {lang == 'fa' ? 'بازگشت به ورود به حساب' : 'Back to sign in'}
           </Button>
         </Link>
         <p
@@ -79,7 +82,7 @@ const ForgotPasswordSent = () => {
             isPending ? 'animate-pulse' : '',
           )}
         >
-          Resend the message{' '}
+          {lang == 'fa' ? 'ارسال مجدد پیام' : 'Resend the message'}{' '}
           {!!timer && '(' + convertSecondsToMinutes(timer) + ')'}
         </p>
       </section>

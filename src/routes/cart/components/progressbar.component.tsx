@@ -17,41 +17,45 @@ import SvgShoppingBagSettingDesktop from '@/assets/svg/shopping-bag-setting_1-de
 import Icon from '@/components/icon';
 import { cn } from '@/lib/utils';
 
-const PROGRESS_ITEMS = [
-  {
-    id: 1,
-    label: 'Cart',
-    mobileIconActive: SvgShoppingBagSettingMobileWhite,
-    mobileIcon: SvgShoppingBagSettingMobile,
-    desktopIconActive: SvgShoppingBagSettingDesktopWhite,
-    desktopIcon: SvgShoppingBagSettingDesktop,
-  },
-  {
-    id: 2,
-    label: 'Checkout',
-    mobileIconActive: SvgCashBacknoteMobileWhite,
-    mobileIcon: SvgCashBacknoteMobile,
-    desktopIconActive: SvgCashBacknoteDesktopWhite,
-    desktopIcon: SvgCashBacknoteDesktop,
-  },
-  {
-    id: 3,
-    label: 'Final order',
-    mobileIconActive: SvgShoppingBagCheckmarkMobileWhite,
-    mobileIcon: SvgShoppingBagCheckmarkMobile,
-    desktopIconActive: SvgShoppingBagCheckmarkDesktopWhite,
-    desktopIcon: SvgShoppingBagCheckmarkDesktop,
-  },
-];
+function PROGRESS_ITEMS(lang: string) {
+  return [
+    {
+      id: 1,
+      label: lang == 'fa' ? 'سبد' : 'Cart',
+      mobileIconActive: SvgShoppingBagSettingMobileWhite,
+      mobileIcon: SvgShoppingBagSettingMobile,
+      desktopIconActive: SvgShoppingBagSettingDesktopWhite,
+      desktopIcon: SvgShoppingBagSettingDesktop,
+    },
+    {
+      id: 2,
+      label: lang == 'fa' ? 'بررسی' : 'Checkout',
+      mobileIconActive: SvgCashBacknoteMobileWhite,
+      mobileIcon: SvgCashBacknoteMobile,
+      desktopIconActive: SvgCashBacknoteDesktopWhite,
+      desktopIcon: SvgCashBacknoteDesktop,
+    },
+    {
+      id: 3,
+      label: lang == 'fa' ? 'نهایی سازی سفارش' : 'Final order',
+      mobileIconActive: SvgShoppingBagCheckmarkMobileWhite,
+      mobileIcon: SvgShoppingBagCheckmarkMobile,
+      desktopIconActive: SvgShoppingBagCheckmarkDesktopWhite,
+      desktopIcon: SvgShoppingBagCheckmarkDesktop,
+    },
+  ];
+}
 
 type ProgressBarProps = {
   active: number;
+  lang: string;
 };
 
 const ProgressBar = (props: ProgressBarProps) => {
+  const progressBarTitle = PROGRESS_ITEMS(props.lang);
   return (
     <ul className="flex justify-center gap-4 md:gap-6 mt-6 px-5">
-      {PROGRESS_ITEMS.map((item, index) => (
+      {progressBarTitle.map((item, index) => (
         <li className="flex md:items-center gap-4 md:gap-6" key={item.id}>
           <div
             className={cn(

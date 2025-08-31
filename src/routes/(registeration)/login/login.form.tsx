@@ -19,7 +19,7 @@ import {
   loginValidation,
 } from './login.validation';
 
-const LoginForm = () => {
+const LoginForm = ({ lang = 'en' }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { mutate, isPending } = useLoginMutation({});
@@ -44,7 +44,9 @@ const LoginForm = () => {
       onSubmit={handleSubmit(submitHandler)}
       className="w-full flex flex-col mt-6 md:mt-8"
     >
-      <label className="text-sm md:text-base">Full name or email</label>
+      <label className="text-sm md:text-base">
+        {lang == 'fa' ? 'نام کامل یا ایمیل' : 'Full name or email'}
+      </label>
       <Controller
         control={control}
         name="username"
@@ -56,13 +58,17 @@ const LoginForm = () => {
           />
         )}
       />
-      <label className="text-sm md:text-base mt-4">Password</label>
+      <label className="text-sm md:text-base mt-4">
+        {lang == 'fa' ? 'رمز عبور' : 'Password'}
+      </label>
       <Controller
         control={control}
         name="password"
         render={({ field, fieldState }) => (
           <>
-            <div className="flex items-center bg-nature-600 rounded-lg mt-2 md:mt-3 pr-3">
+            <div
+              className={`flex items-center bg-nature-600 rounded-lg mt-2 md:mt-3 ${lang == 'fa' ? ' pl-3 ' : ' pr-3 '}`}
+            >
               <Input
                 type={showPassword ? 'text' : 'password'}
                 {...field}
@@ -89,10 +95,10 @@ const LoginForm = () => {
 
       <div className="flex items-center justify-end mt-4">
         <Link
-          href={'/forgot-password'}
+          href={lang == 'fa' ? '/fa/forgot-password' : '/forgot-password'}
           className="text-link text-xs md:text-base"
         >
-          I forgot my password
+          {lang == 'fa' ? 'رمز عبور را فراموش کرده‌ام' : 'I forgot my password'}
         </Link>
       </div>
 
@@ -102,7 +108,7 @@ const LoginForm = () => {
         isLoading={isPending}
         className="mt-6 md:mt-8 font-bold text-sm shadow-color-md md:text-base"
       >
-        Login
+        {lang == 'fa' ? 'ورود به حساب' : 'Login'}
       </Button>
     </form>
   );

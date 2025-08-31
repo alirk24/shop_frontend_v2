@@ -9,7 +9,7 @@ import useAddProductToCartMutation from '@/routes/product-details/queries/add-pr
 import { useAuthStore } from '@/store/auth.store';
 import { CartProduct, useCartStore } from '@/store/cart.store';
 
-type NavbarProductCardProps = CartProduct;
+type NavbarProductCardProps = CartProduct & { lang: string };
 
 const NavbarProductCard = (props: NavbarProductCardProps) => {
   const profile = useAuthStore((s) => s.profile);
@@ -54,18 +54,23 @@ const NavbarProductCard = (props: NavbarProductCardProps) => {
           </p>
           <Icon className="flex items-center gap-2 mt-2 text-sm md:text-base text-text-300">
             <SvgWeight />
-            {(props.weight * props.count).toFixed(2)}KG
+            {(props.weight * props.count).toFixed(2)}
+            {props.lang == 'fa' ? ' کیلوگرم' : 'KG'}
           </Icon>
         </div>
       </Link>
       <div className="flex flex-col items-end">
         <div className="flex items-center gap-1 md:gap-2">
           <p className="font-bold text-sm md:text-lg">
-            ${props.priceWithDiscount.toFixed(2)}
+            {props.lang == 'fa' ? '' : '$'}
+            {props.priceWithDiscount.toFixed(2)}
+            {props.lang == 'fa' ? ' تومان' : ''}
           </p>
           {props.price > props.priceWithDiscount && (
             <p className="line-through decoration-text-300 text-text-300 text-xs md:text-base">
-              ${props.price.toFixed(2)}
+              {props.lang == 'fa' ? '' : '$'}
+              {props.price.toFixed(2)}
+              {props.lang == 'fa' ? ' تومان' : ''}
             </p>
           )}
         </div>

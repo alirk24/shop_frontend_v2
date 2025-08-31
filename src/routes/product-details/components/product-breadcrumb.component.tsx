@@ -9,18 +9,20 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 
-const ProductBreadcrumb = () => {
+const ProductBreadcrumb = ({ lang = 'en', productName = '' }) => {
   return (
     <section className="mt-6 md:mt-9 px-5 md:px-20">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            <BreadcrumbLink href={lang == 'fa' ? '/fa' : '/'}>
+              {lang == 'fa' ? 'خانه' : 'Home'}
+            </BreadcrumbLink>
           </BreadcrumbItem>
-          <BreadcrumbSeparator />
+          <BreadcrumbSeparator className={lang == 'fa' ? 'rotate-180' : ''} />
           <BreadcrumbItem>
             <BreadcrumbPage className="text-text-500">
-              Single product
+              {productName}
             </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>

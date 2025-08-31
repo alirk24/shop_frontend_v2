@@ -12,7 +12,7 @@ import {
   emailVerificationValidation,
 } from './email-verification.validation';
 
-const EmailVerificationForm = () => {
+const EmailVerificationForm = ({ lang = 'en' }) => {
   const signupEmail = useRegisterStore((s) => s.signupEmail);
 
   const { mutate, isPending } = useEmailVerificationMutation();
@@ -34,7 +34,9 @@ const EmailVerificationForm = () => {
       onSubmit={handleSubmit(submitHandler)}
       className="w-full flex flex-col mt-6 md:mt-8"
     >
-      <label className="text-sm md:text-base">Email verification code</label>
+      <label className="text-sm md:text-base">
+        {lang == 'fa' ? 'کد تایید ایمیل' : 'Email verification code'}
+      </label>
       <Controller
         control={control}
         name="code"
@@ -53,7 +55,7 @@ const EmailVerificationForm = () => {
         variant={isPending || !isFormValid ? 'disabled' : 'default'}
         className="font-bold text-sm md:text-base shadow-color-md rounded-xl mt-6 md:mt-8"
       >
-        Confirm
+        {lang == 'fa' ? 'تایید' : 'Confirm'}
       </Button>
     </form>
   );

@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
->(({ className, ...props }, ref) => (
+>(({ className, lang = 'en', ...props }, ref) => (
   <SwitchPrimitives.Root
     className={cn(
       'peer inline-flex h-6 w-11 shrink-0 outline-none cursor-pointer items-center rounded-full border-2 border-transparent transition-colors disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-secondary-500 data-[state=unchecked]:bg-nature-800',
@@ -19,7 +19,10 @@ const Switch = React.forwardRef<
   >
     <SwitchPrimitives.Thumb
       className={cn(
-        'pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 ',
+        'pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform',
+        lang === 'fa'
+          ? 'data-[state=checked]:-translate-x-5 data-[state=unchecked]:translate-x-0'
+          : 'data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0',
       )}
     />
   </SwitchPrimitives.Root>

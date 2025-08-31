@@ -13,7 +13,7 @@ import {
   Tooltip,
 } from 'chart.js';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import LoadingSpinner from '@/components/ui/loading-spinner';
 import { OrderStatus } from '@/routes/(dashboard)/orders/constants/orders.constants';
 import { OrderItem, Orders } from '@/routes/(dashboard)/orders/orders.types';

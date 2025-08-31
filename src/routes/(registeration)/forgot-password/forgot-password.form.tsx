@@ -12,7 +12,7 @@ import {
   forgotPasswordValidation,
 } from './forgot-password.validation';
 
-const ForgotPasswordForm = () => {
+const ForgotPasswordForm = ({ lang = 'en' }) => {
   const setEmail = useRegisterStore((s) => s.setSignupEmail);
   const { mutate, isPending } = useForgotPasswordMutation();
 
@@ -33,7 +33,9 @@ const ForgotPasswordForm = () => {
       onSubmit={handleSubmit(submitHandler)}
       className="w-full flex flex-col mt-6 md:mt-8"
     >
-      <label className="text-sm md:text-base">Email address</label>
+      <label className="text-sm md:text-base">
+        {lang == 'fa' ? 'آدرس ایمیل' : 'Email address'}
+      </label>
       <Controller
         control={control}
         name="email"
@@ -51,7 +53,7 @@ const ForgotPasswordForm = () => {
         variant={isPending || !isFormValid ? 'disabled' : 'default'}
         className="font-bold text-sm md:text-base shadow-color-md rounded-xl mt-6 md:mt-8"
       >
-        Send email
+        {lang == 'fa' ? 'ارسال ایمیل' : 'Send email'}
       </Button>
     </form>
   );

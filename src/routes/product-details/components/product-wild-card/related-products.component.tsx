@@ -9,7 +9,7 @@ import StandardProductCard from '@/routes/home/components/cards/standard-product
 
 import useRelatedProductsQuery from '../../queries/related-products.query';
 
-const RelatedProducts = () => {
+const RelatedProducts = ({ lang = 'en' }) => {
   const { data, isPending } = useRelatedProductsQuery();
 
   if (isPending) return <LoadingSpinner className="mx-auto mt-16 md:mt-24" />;
@@ -17,14 +17,14 @@ const RelatedProducts = () => {
   if (!isPending && data) {
     const productSlides = data.map((item) => (
       <SwiperSlide key={item.id}>
-        <StandardProductCard {...item} />
+        <StandardProductCard lang={lang} {...item} />
       </SwiperSlide>
     ));
 
     return (
       <section className="mt-16 md:mt-24">
         <h4 className="text-xl md:text-4xl font-nunito font-black text-center">
-          Related products
+          {lang == 'fa' ? 'محصولات مرتبط' : 'Related products'}
         </h4>
 
         <Swiper

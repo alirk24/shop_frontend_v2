@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import SvgPolygon56 from '@/assets/svg/polygon-56.svg';
 import Icon from '@/components/icon';
 import { cn } from '@/lib/utils';
@@ -8,12 +8,14 @@ import { cn } from '@/lib/utils';
 import SvgWeightDesktop from '@icons/weight-desktop.svg';
 import SvgWeight from '@icons/weight.svg';
 
-type StandardProductCardProps = Product;
+type StandardProductCardProps = Product & { lang: string };
 
 const StandardProductCard = (props: StandardProductCardProps) => {
   return (
     <Link
-      href={`/product/${props.id}`}
+      href={
+        props.lang == 'fa' ? `/fa/product/${props.id}` : `/product/${props.id}`
+      }
       className="flex flex-col border border-nature-800 rounded-2xl p-4 md:col-span-1"
     >
       <div className="relative flex justify-center items-center h-[152px] bg-nature-600 rounded-xl">
@@ -54,7 +56,8 @@ const StandardProductCard = (props: StandardProductCardProps) => {
         <Icon className="flex md:items-center gap-1 text-sm md:text-base font-bold">
           <SvgWeight className="md:hidden w-5 h-5" />
           <SvgWeightDesktop className="hidden md:block" />
-          {props.weight}KG
+          {props.weight}
+          {props.lang == 'fa' ? ' کیلوگرم' : 'KG'}
         </Icon>
       </div>
       <p className="text-sm md:text-base mt-3 leading-[26px] md:leading-7">
@@ -64,11 +67,15 @@ const StandardProductCard = (props: StandardProductCardProps) => {
       </p>
       <div className="flex gap-2 items-center mt-3 md:mt-4">
         <p className="font-bold text-xl text-primary-500">
-          ${props.price_after_promotion.toFixed(2)}
+          {props.lang == 'fa' ? '' : '$'}
+          {props.price_after_promotion.toFixed(2)}
+          {props.lang == 'fa' ? ' تومان' : ''}
         </p>
         {props.total_discount > 0 && (
           <p className="text-text-300 line-through decoration-text-300 text-sm md:text-base">
-            ${props.price.toFixed(2)}
+            {props.lang == 'fa' ? '' : '$'}
+            {props.price.toFixed(2)}
+            {props.lang == 'fa' ? ' تومان' : ''}
           </p>
         )}
       </div>

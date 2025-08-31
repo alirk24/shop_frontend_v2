@@ -1,13 +1,14 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import { Category } from '@/app/(core)/shop/page';
+import { Category } from '@/app/(en)/(core)/shop/page';
 import { cn } from '@/lib/utils';
 
 type CategoryCardProps = {
   category: Category;
   totalLength: number;
   index: number;
+  lang: string;
 };
 
 const CategoryCard = (props: CategoryCardProps) => {
@@ -16,7 +17,9 @@ const CategoryCard = (props: CategoryCardProps) => {
   return (
     <div
       onClick={() => {
-        router.push(`/shop?category=${props.category.id}`);
+        props.lang == 'fa'
+          ? router.push(`/fa/shop?category=${props.category.id}`)
+          : router.push(`/shop?category=${props.category.id}`);
       }}
       className={cn(
         'flex flex-col items-center gap-3 md:gap-6 cursor-pointer w-full',

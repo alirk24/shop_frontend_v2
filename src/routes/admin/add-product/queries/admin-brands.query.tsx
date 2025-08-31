@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Brand } from '@/app/(core)/shop/page';
+import { Brand } from '@/app/(en)/(core)/shop/page';
 import useAxiosProtected from '@/hooks/use-axios-protected.hook';
 
 import { adminQueryKeys } from '../../_constants/admin-query-keys.constants';

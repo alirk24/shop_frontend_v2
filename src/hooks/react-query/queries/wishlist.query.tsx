@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import useAxiosProtected from '@/hooks/use-axios-protected.hook';
 import queryKeys from '@/lib/constants/query-keys.constants';
 import { useAuthStore } from '@/store/auth.store';

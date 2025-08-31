@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useParams } from 'next/navigation';
 import React from 'react';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import { axiosInstance } from '@/lib/constants/axios';
 import queryKeys from '@/lib/constants/query-keys.constants';
 

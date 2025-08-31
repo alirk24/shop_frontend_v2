@@ -22,6 +22,7 @@ import {
 type EditProfileFormProps = {
   profile: ProfileType;
   addresses: AddressResponse[];
+  lang: string;
 };
 
 const EditProfileForm = (props: EditProfileFormProps) => {
@@ -65,7 +66,11 @@ const EditProfileForm = (props: EditProfileFormProps) => {
         ...(!!props.addresses[0] ? { id: props.addresses[0].id } : {}),
       });
 
-      toast.success('profile and address successfully changed');
+      toast.success(
+        props.lang == 'fa'
+          ? 'مشخصات و آدرس با موفقیت تغییر یافت'
+          : 'profile and address successfully changed',
+      );
     } catch (err: any) {
       toast.error(err.response.data.message);
     }
@@ -81,18 +86,20 @@ const EditProfileForm = (props: EditProfileFormProps) => {
           <SvgSingleUserRed20 className="md:hidden" />
           <SvgSingleUserRed24 className="hidden md:block" />
         </Icon>
-        Saved
+        {props.lang == 'fa' ? 'ذخیره شده' : 'Saved'}
       </div>
       <div className="flex items-center gap-2 px-4 md:px-6 mt-6">
         <span className="w-[9px] h-[9px] bg-primary-500 rounded-[50px]" />
         <p className="font-nunito font-bold text-sm md:text-lg">
-          Profile information
+          {props.lang == 'fa' ? 'اطلاعات پروفایل' : 'Profile information'}
         </p>
       </div>
 
       <div className="flex flex-col md:grid md:grid-cols-2 md:gap-8 mt-6 px-4 gap-5 md:px-6">
         <div>
-          <label className="text-sm md:text-base">Full name</label>
+          <label className="text-sm md:text-base">
+            {props.lang == 'fa' ? 'نام و نام خانوادگی' : 'Full name'}
+          </label>
           <Controller
             control={control}
             name="fullName"
@@ -106,7 +113,9 @@ const EditProfileForm = (props: EditProfileFormProps) => {
           />
         </div>
         <div>
-          <label className="text-sm md:text-base">Email</label>
+          <label className="text-sm md:text-base">
+            {props.lang == 'fa' ? 'ایمیل' : 'Email'}
+          </label>
           <div className="flex items-center mt-3 gap-3 rounded-xl bg-nature-600 pr-4">
             <Input readOnly disabled value={props.profile.email} />
             {/* <PenBox
@@ -116,7 +125,9 @@ const EditProfileForm = (props: EditProfileFormProps) => {
           </div>
         </div>
         <div>
-          <label className="text-sm md:text-base">Phone</label>
+          <label className="text-sm md:text-base">
+            {props.lang == 'fa' ? 'تلفن' : 'Phone'}
+          </label>
           <Controller
             control={control}
             name="phone"
@@ -131,8 +142,12 @@ const EditProfileForm = (props: EditProfileFormProps) => {
           />
         </div>
         <div>
-          <label className="text-sm md:text-base">Password</label>
-          <div className="flex items-center mt-3 gap-3 rounded-xl bg-nature-600 pr-4">
+          <label className="text-sm md:text-base">
+            {props.lang == 'fa' ? 'رمز عبور' : 'Password'}
+          </label>
+          <div
+            className={`flex items-center mt-3 gap-3 rounded-xl bg-nature-600 ${props.lang == 'fa' ? ' pl-4 ' : ' pr-4 '}`}
+          >
             <Input readOnly value={'********'} />
             <PenBox
               onClick={() => {
@@ -148,12 +163,14 @@ const EditProfileForm = (props: EditProfileFormProps) => {
       <div className="flex items-center gap-2 px-4 md:px-6 mt-6 md:mt-8">
         <span className="w-[9px] h-[9px] bg-primary-500 rounded-[50px]" />
         <p className="font-nunito font-bold text-sm md:text-lg">
-          Address information
+          {props.lang == 'fa' ? 'اطلاعات آدرس' : 'Address information'}
         </p>
       </div>
       <div className="flex flex-col md:grid md:grid-cols-2 md:gap-8  mt-6 px-4 gap-5 md:px-6">
         <div>
-          <label className="text-sm md:text-base">Country / Region</label>
+          <label className="text-sm md:text-base">
+            {props.lang == 'fa' ? 'کشور / منطقه' : 'Country / Region'}
+          </label>
           <Controller
             control={control}
             name="country"
@@ -167,7 +184,9 @@ const EditProfileForm = (props: EditProfileFormProps) => {
           />
         </div>
         <div>
-          <label className="text-sm md:text-base">County</label>
+          <label className="text-sm md:text-base">
+            {props.lang == 'fa' ? '' : ''}County
+          </label>
           <Controller
             control={control}
             name="county"
@@ -181,7 +200,9 @@ const EditProfileForm = (props: EditProfileFormProps) => {
           />
         </div>
         <div>
-          <label className="text-sm md:text-base">Street address</label>
+          <label className="text-sm md:text-base">
+            {props.lang == 'fa' ? 'آدرس' : 'Street address'}
+          </label>
           <Controller
             control={control}
             name="street"
@@ -195,7 +216,9 @@ const EditProfileForm = (props: EditProfileFormProps) => {
           />
         </div>
         <div>
-          <label className="text-sm md:text-base">Town / City</label>
+          <label className="text-sm md:text-base">
+            {props.lang == 'fa' ? 'شهر / شهرستان' : 'Town / City'}
+          </label>
           <Controller
             control={control}
             name="city"
@@ -209,7 +232,9 @@ const EditProfileForm = (props: EditProfileFormProps) => {
           />
         </div>
         <div>
-          <label className="text-sm md:text-base">Postcode</label>
+          <label className="text-sm md:text-base">
+            {props.lang == 'fa' ? 'کد پستی' : 'Postcode'}
+          </label>
           <Controller
             control={control}
             name="postCode"
@@ -234,7 +259,7 @@ const EditProfileForm = (props: EditProfileFormProps) => {
           disabled={isAddressPending || isProfilePending}
           className="w-full md:w-[232px] rounded-xl font-bold text-sm md:text-base"
         >
-          Confirmation
+          {props.lang == 'fa' ? 'تایید' : 'Confirmation'}
         </Button>
       </div>
     </form>

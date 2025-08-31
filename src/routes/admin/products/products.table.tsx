@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import {
   Table,
   TableBody,

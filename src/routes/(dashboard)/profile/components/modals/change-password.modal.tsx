@@ -20,7 +20,7 @@ import {
 } from '../../change-password.validation';
 import useEditPasswordMutation from '../../edit-password.mutation';
 
-const ChangePasswordModal = () => {
+const ChangePasswordModal = ({ lang = 'en' }) => {
   const isModalOpen = useDashboardModalsStore(
     (s) => s.isChangePasswordModalOpen,
   );
@@ -53,7 +53,9 @@ const ChangePasswordModal = () => {
         className="w-[90%] md:max-w-[458px] bg-white flex flex-col items-center p-0"
       >
         <div className="w-full flex justify-between items-center bg-nature-800 p-4 rounded-t-2xl">
-          <p className="font-nunito font-bold">Edit password</p>
+          <p className="font-nunito font-bold">
+            {lang == 'fa' ? 'ویرایش رمز عبور' : 'Edit password'}
+          </p>
           <X
             className="text-secondary-300 w-[16px] h-[16px] md:w-[20px] md:h-[20px] cursor-pointer"
             onClick={() => {
@@ -65,7 +67,9 @@ const ChangePasswordModal = () => {
           onSubmit={handleSubmit(submitHandler)}
           className="w-full px-3 md:px-4 py-4"
         >
-          <p className="text-sm md:text-base">Current password*</p>
+          <p className="text-sm md:text-base">
+            {lang == 'fa' ? 'رمز عبور فعلی' : 'Current password'}*
+          </p>
           <Controller
             control={control}
             name="oldPassword"
@@ -78,7 +82,9 @@ const ChangePasswordModal = () => {
             )}
           />
 
-          <p className="text-sm md:text-base mt-5 md:mt-6">New password*</p>
+          <p className="text-sm md:text-base mt-5 md:mt-6">
+            {lang == 'fa' ? 'رمز عبور جدید' : 'New password'}*
+          </p>
           <Controller
             control={control}
             name="newPassword"
@@ -102,7 +108,7 @@ const ChangePasswordModal = () => {
             >
               <SvgCheckmarkCircle />
             </Icon>
-            At least 8 characters
+            {lang == 'fa' ? 'حداقل ۸ کاراکتر' : 'At least 8 characters'}
           </div>
           <div
             className={cn(
@@ -117,7 +123,7 @@ const ChangePasswordModal = () => {
             >
               <SvgCheckmarkCircle />
             </Icon>
-            Letters and numbers
+            {lang == 'fa' ? 'حروف و اعداد' : 'Letters and numbers'}
           </div>
 
           <Button
@@ -128,7 +134,7 @@ const ChangePasswordModal = () => {
             isLoading={isPending}
             className="mt-6 w-full rounded-lg text-sm font-bold md:h-11 md:text-base"
           >
-            Confirmation
+            {lang == 'fa' ? 'تایید' : 'Confirmation'}
           </Button>
         </form>
       </DialogContent>

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import { axiosInstance } from '@/lib/constants/axios';
 import queryKeys from '@/lib/constants/query-keys.constants';
 

@@ -5,7 +5,7 @@ import SvgUserProfile40 from '@/assets/svg/user-profile-40.svg';
 
 import { Comment } from '../queries/comments.query';
 
-type Props = Comment;
+type Props = Comment & { lang: string };
 
 const CommentCard = (props: Props) => {
   return (
@@ -17,7 +17,9 @@ const CommentCard = (props: Props) => {
         </span>
         <div className="flex flex-col justify-center gap-1 md:gap-2">
           <p className="font-bold text-sm md:text-xl">{props.reviewer}</p>
-          <p className="text-xs md:text-base">Website user</p>
+          <p className="text-xs md:text-base">
+            {props.lang == 'fa' ? 'کاربر سایت' : 'Website user'}
+          </p>
         </div>
       </div>
       <p className="mt-6 text-sm leading-7 md:pl-[99px] whitespace-pre-line">
@@ -33,7 +35,9 @@ const CommentCard = (props: Props) => {
             />
             <div className="flex flex-col justify-center gap-1 md:gap-2">
               <p className="font-bold text-sm md:text-xl">petshop</p>
-              <p className="text-xs md:text-base">Website admin</p>
+              <p className="text-xs md:text-base">
+                {props.lang == 'fa' ? 'مدیر سایت' : 'Website admin'}
+              </p>
             </div>
           </div>
           <p className="mt-6 text-sm leading-7 md:pl-[430px] whitespace-pre-line">

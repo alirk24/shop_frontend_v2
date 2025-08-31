@@ -15,7 +15,7 @@ import { useFilterModalStore } from '../store/filter-moda.store';
 import { useFiltersStore } from '../store/filters.store';
 import ShopProductCard from './cards/shop-product-card.component';
 
-const ShopProducts = () => {
+const ShopProducts = ({ lang = 'en' }) => {
   const { data, isPending } = useFiltersQuery();
 
   const setIsModalOpen = useFilterModalStore((s) => s.setIsModalOpen);
@@ -32,11 +32,11 @@ const ShopProducts = () => {
         <div className="hidden md:flex items-center gap-6">
           <Icon className="flex items-center gap-2 text-xl font-bold">
             <SvgFilterMobile />
-            Sort by:
+            {lang == 'fa' ? 'مرتب سازی براساس:' : 'Sort by:'}
           </Icon>
           {SORT_FILTERS.map((item) => (
             <p
-              key={item.name}
+              key={item.nameEn}
               className={cn(
                 'text-xl text-text-400 cursor-pointer select-none',
                 sortBy === item.value ? 'underline' : '',
@@ -45,12 +45,14 @@ const ShopProducts = () => {
                 setSortBy(item.value);
               }}
             >
-              {item.name}
+              {lang == 'fa' ? item.nameFa : item.nameEn}
             </p>
           ))}
         </div>
         <p className="md:text-base text-xs text-text-400">
-          Showing {data?.length || 0} of {data?.length || 0} results
+          {lang == 'fa' ? 'نمایش' : 'Showing'} {data?.length || 0}{' '}
+          {lang == 'fa' ? 'از' : 'of'} {data?.length || 0}{' '}
+          {lang == 'fa' ? 'نتایج' : 'results'}
         </p>
       </section>
       <section className="md:hidden flex items-center mt-4 gap-4">
@@ -64,7 +66,7 @@ const ShopProducts = () => {
             onChange={(e) => {
               setSearch(e.target.value);
             }}
-            placeholder="Search product..."
+            placeholder={lang == 'fa' ? 'جستجو کالا ...' : 'Search product...'}
             className="bg-transparent placeholder:text-text-200 font-nunito border-none text-base"
           />
         </div>
@@ -81,13 +83,15 @@ const ShopProducts = () => {
       {isPending && <LoadingSpinner className="mt-6" />}
 
       {!isPending && data && data.length === 0 && (
-        <p className="mt-10 text-center text-lg">Nothing to show</p>
+        <p className="mt-10 text-center text-lg">
+          {lang == 'fa' ? 'نتیجه‌ای پیدا نشد' : 'Nothing to show'}
+        </p>
       )}
 
       {!isPending && data && data?.length > 0 && (
         <section className="flex flex-col gap-4 md:gap-x-6 md:gap-y-8 md:grid md:grid-cols-3 mt-6">
           {data.map((item) => (
-            <ShopProductCard key={item.id} {...item} />
+            <ShopProductCard lang={lang} key={item.id} {...item} />
           ))}
         </section>
       )}

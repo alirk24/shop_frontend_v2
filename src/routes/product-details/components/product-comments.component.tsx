@@ -9,7 +9,7 @@ import { useProductDetailsStore } from '../product-details.store';
 import useCommentsQuery from '../queries/comments.query';
 import CommentCard from './comment-card.component';
 
-const ProductComments = () => {
+const ProductComments = ({ lang = 'en' }) => {
   const router = useRouter();
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -32,9 +32,11 @@ const ProductComments = () => {
         <section className="flex flex-col gap-4 md:flex-row md:justify-between">
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
             <p className="text-xl font-black font-nunito md:text-4xl">
-              Customers comments
+              {lang == 'fa' ? 'نظرات مشتریان' : 'Customers comments'}
             </p>
-            <p className="text-sm md:text-xl">{data?.length || 0} comment</p>
+            <p className="text-sm md:text-xl">
+              {data?.length || 0} {lang == 'fa' ? 'نظر' : 'comment'}
+            </p>
           </div>
           <Button
             variant={'outline'}
@@ -42,19 +44,24 @@ const ProductComments = () => {
             disabled={profileLoading}
             onClick={() => {
               if (!profileLoading) {
-                if (profile) setCommentModalOpen(true);
-                else router.push('/login');
+                if (profile) {
+                  setCommentModalOpen(true);
+                } else {
+                  lang == 'fa'
+                    ? router.push('/fa/login')
+                    : router.push('/login');
+                }
               }
             }}
             className="w-[184px] md:w-[242px] rounded-lg md:rounded-2xl font-semibold md:font-semibold md:text-xl text-sm"
           >
-            Register a comment
+            {lang == 'fa' ? 'ثبت نظر' : 'Register a comment'}
           </Button>
         </section>
 
         <ul className="flex flex-col gap-6 md:gap-10 mt-6 md:mt-9">
           {comments.map((item) => (
-            <CommentCard key={item.id} {...item} />
+            <CommentCard lang={lang} key={item.id} {...item} />
           ))}
         </ul>
         {data.length > 3 && (
@@ -70,7 +77,15 @@ const ProductComments = () => {
               <Plus className="w-4 h-4 md:w-5 md:h-5" />
             )}
             <p className="font-semibold text-sm md:text-lg">
-              Show {isExpanded ? 'less' : 'more'} comments
+              {lang == 'fa' ? 'نمایش' : 'Show'}{' '}
+              {isExpanded
+                ? lang == 'fa'
+                  ? 'کمتر'
+                  : 'less'
+                : lang == 'fa'
+                  ? 'بیشتر'
+                  : 'more'}{' '}
+              {lang == 'fa' ? 'نظرات' : 'comments'}
             </p>
           </div>
         )}

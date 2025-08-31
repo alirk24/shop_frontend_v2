@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import ShopSpecifications from '@/components/shared/shop-specifications.component';
 
 import Footer from '../../components/shared/footer.component';
@@ -13,15 +13,22 @@ import ProductWildCard from './components/product-wild-card/product-wild-card.co
 import RelatedProducts from './components/product-wild-card/related-products.component';
 import useSingleProductQuery from './queries/single-product.query';
 
-const ProductDetails = (props: { product: Product }) => {
-  const { data } = useSingleProductQuery(props.product);
+const ProductDetails = ({
+  lang = 'en',
+  product,
+}: {
+  product: Product;
+  lang: string;
+}) => {
+  const { data } = useSingleProductQuery(product);
 
   if (data)
     return (
       <>
-        <AddCommentModal />
-        <ProductBreadcrumb />
+        <AddCommentModal lang={lang} />
+        <ProductBreadcrumb productName={data.name} lang={lang} />
         <ProductWildCard
+          lang={lang}
           title={data.name}
           description={data.description}
           id={data.id}
@@ -36,10 +43,13 @@ const ProductDetails = (props: { product: Product }) => {
           IngredientsAnalysis={data.IngredientsAnalysis}
           ShippingReturns={data.ShippingReturns}
         />
-        <ShopSpecifications className="mt-10 md:mt-24 px-5 md:px-20" />
-        <ProductComments />
-        <RelatedProducts />
-        <Footer />
+        <ShopSpecifications
+          lang={lang}
+          className="mt-10 md:mt-24 px-5 md:px-20"
+        />
+        <ProductComments lang={lang} />
+        <RelatedProducts lang={lang} />
+        <Footer lang={lang} />
       </>
     );
 };

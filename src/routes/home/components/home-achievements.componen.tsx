@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-const HomeAchievements = () => {
+const HomeAchievements = ({ lang = 'en' }) => {
   return (
     <section className="px-5 mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-4 md:px-20">
       <div className="flex flex-col items-center justify-center bg-[#F9F7FF] rounded-2xl p-4 md:h-[298px]">
@@ -15,10 +15,12 @@ const HomeAchievements = () => {
           />
         </span>
         <p className="font-nunito font-black text-sm md:text-xl mt-3 md:mt-6 text-center">
-          +2000 Products
+          {lang == 'fa' ? '2000+ محصول' : '+2000 Products'}
         </p>
         <p className="mt-2 text-xs md:text-base text-center">
-          Best Quality, Variety of Categories
+          {lang == 'fa'
+            ? 'بهترین کیفیت، انواع دسته‌بندی‌ها'
+            : 'Best Quality, Variety of Categories'}
         </p>
       </div>
       <div className="flex flex-col items-center justify-center bg-[#FFFBF4] rounded-2xl p-4 md:h-[298px]">
@@ -32,10 +34,12 @@ const HomeAchievements = () => {
           />
         </span>
         <p className="font-nunito font-black text-sm md:text-xl mt-3 md:mt-6 text-center">
-          +20 Countries
+          {lang == 'fa' ? '20+ کشور' : '+20 Countries'}
         </p>
         <p className="mt-2 text-xs md:text-base text-center">
-          Serving Pets Worldwide
+          {lang == 'fa'
+            ? 'خدمت به حیوانات خانگی در سراسر جهان'
+            : 'Serving Pets Worldwide'}
         </p>
       </div>
       <div className="flex flex-col items-center justify-center bg-[#F0FFFB] rounded-2xl p-4 md:h-[298px]">
@@ -49,10 +53,12 @@ const HomeAchievements = () => {
           />
         </span>
         <p className="font-nunito font-black text-sm md:text-xl mt-3 md:mt-6 text-center">
-          +25 Years Experience
+          {lang == 'fa' ? '25+ سال سابقه' : '+25 Years Experience'}
         </p>
         <p className="mt-2 text-xs md:text-base text-center">
-          Trusted by Pet Owners Since 1999
+          {lang == 'fa'
+            ? 'مورد اعتماد صاحبان حیوانات خانگی از سال 1377'
+            : 'Trusted by Pet Owners Since 1999'}
         </p>
       </div>
       <div className="flex flex-col items-center justify-center bg-[#FFF7F6] rounded-2xl p-4 md:h-[298px]">
@@ -66,10 +72,12 @@ const HomeAchievements = () => {
           />
         </span>
         <p className="font-nunito font-black text-sm md:text-xl mt-3 md:mt-6 text-center">
-          +1000 Happy Clients
+          {lang == 'fa' ? '1000+ مشتری خوشحال' : '+1000 Happy Clients'}
         </p>
         <p className="mt-2 text-xs md:text-base text-center">
-          Loved by Pets & Owners Alike
+          {lang == 'fa'
+            ? 'مورد علاقه حیوانات خانگی و صاحبان آنها'
+            : 'Loved by Pets & Owners Alike'}
         </p>
       </div>
     </section>

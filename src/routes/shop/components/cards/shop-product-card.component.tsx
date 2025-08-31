@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Product } from '@/app/(core)/product/[productId]/page';
+import { Product } from '@/app/(en)/(core)/product/[productId]/page';
 import SvgPolygon56 from '@/assets/svg/polygon-56.svg';
 import Icon from '@/components/icon';
 import { cn } from '@/lib/utils';
@@ -8,12 +8,14 @@ import { cn } from '@/lib/utils';
 import SvgWeightDesktop from '@icons/weight-desktop.svg';
 import SvgWeight from '@icons/weight-extra-small.svg';
 
-type ShopProductCardProps = Product;
+type ShopProductCardProps = Product & { lang: string };
 
 const ShopProductCard = (props: ShopProductCardProps) => {
   return (
     <Link
-      href={`/product/${props.id}`}
+      href={
+        props.lang == 'fa' ? `/fa/product/${props.id}` : `/product/${props.id}`
+      }
       className="flex md:flex-col gap-4 md:gap-0 border border-nature-800 rounded-2xl p-3 md:p-4"
     >
       <div className="relative flex justify-center items-start md:items-center h-auto md:h-[152px] bg-inherit md:bg-nature-600 rounded-xl">
@@ -56,7 +58,8 @@ const ShopProductCard = (props: ShopProductCardProps) => {
           <Icon className="flex md:items-center gap-1 text-xs md:text-base md:font-bold">
             <SvgWeight className="md:hidden w-5 h-5" />
             <SvgWeightDesktop className="hidden md:block" />
-            {props.weight}KG
+            {props.weight}
+            {props.lang == 'fa' ? ' کیلوگرم' : 'KG'}
           </Icon>
         </div>
         <p className="text-xs md:text-base mt-2 md:mt-3">
@@ -67,11 +70,15 @@ const ShopProductCard = (props: ShopProductCardProps) => {
 
         <div className="flex gap-2 items-center mt-3 md:mt-4">
           <p className="font-bold text-sm md:text-xl text-primary-500">
-            ${props.price_after_promotion.toFixed(2)}
+            {props.lang == 'fa' ? '' : '$'}
+            {props.price_after_promotion.toFixed(2)}
+            {props.lang == 'fa' ? ' تومان' : ''}
           </p>
           {props.total_discount > 0 && (
             <p className="text-text-300 line-through decoration-text-300 text-xs md:text-base">
-              ${props.price.toFixed(2)}
+              {props.lang == 'fa' ? '' : '$'}
+              {props.price.toFixed(2)}
+              {props.lang == 'fa' ? ' تومان' : ''}
             </p>
           )}
         </div>

@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import SvgArrowWhite16 from '@/assets/svg/Arrow-white-16.svg';
 import SvgArrowWhite24 from '@/assets/svg/Arrow-white-24.svg';
 import SvgLogoDesktop from '@/assets/svg/logo-title-desktop.svg';
 import SvgLogoMobile from '@/assets/svg/logo-title-mobile.svg';
 import Icon from '@/components/icon';
+import { Button } from '@/components/ui/button';
 import useProfileQuery from '@/hooks/react-query/queries/profile.query';
 import useSyncCartQuery from '@/hooks/react-query/queries/sync-cart.query';
 import { cn } from '@/lib/utils';
@@ -22,7 +23,7 @@ import MobileSidebar from './mobile-sidebar/mobile-sidebar.component';
 import NavbarSearch from './search/navbar-search.component';
 import ShopHover from './shop-hover.component';
 
-const Navbar = () => {
+const Navbar = ({ lang = 'en' }) => {
   useProfileQuery();
   useSyncCartQuery();
 
@@ -30,58 +31,73 @@ const Navbar = () => {
 
   const pathname = usePathname();
   const router = useRouter();
-
   const profile = useAuthStore((s) => s.profile);
+
+  const searchParams = useSearchParams();
+  const basePath = pathname.replace(/^\/fa/, ''); // Remove '/fa' from the pathname if present
+
+  // const handleLanguageToggle = () => {
+  //   // Get the current path
+  //   const newPath = pathname.startsWith('/fa')
+  //     ? pathname.replace(/^\/fa/, '') // Remove '/fa' from the start
+  //     : `/fa${pathname}`; // Add '/fa' to the start
+
+  //   router.push(newPath); // Navigate to the new path
+  // };
 
   return (
     <nav className="flex justify-between md:items-center px-5 md:px-20 py-3 md:py-5 border-b border-nature-800">
       <div className="flex gap-3">
         {/* Drawer */}
-        <MobileSidebar categories={data} />
+        <MobileSidebar categories={data} lang={lang} />
         {/* End Drawer */}
-        <Link href={'/'}>
+        <Link href={lang == 'fa' ? '/fa' : '/'}>
           <SvgLogoMobile className="md:hidden mt-1" />
           <SvgLogoDesktop className="hidden md:block" />
         </Link>
-        <ul className="hidden md:flex items-center pl-8 gap-7">
-          <Link href={'/'}>
+        <ul
+          className={`hidden md:flex items-center ${lang == 'fa' ? ' pr-8 ' : ' pl-8 '} gap-7`}
+        >
+          <Link href={lang == 'fa' ? '/fa' : '/'}>
             <li
               className={cn(
                 'flex items-center gap-1 cursor-pointer  text-lg',
-                pathname === '/' ? 'font-bold text-primary-500 active-dot' : '',
+                pathname === '/' || pathname === '/fa'
+                  ? 'font-bold text-primary-500 active-dot'
+                  : '',
               )}
             >
-              Home
+              {lang == 'fa' ? 'خانه' : 'Home'}
             </li>
           </Link>
           {/* Shop hover card */}
-          <ShopHover categories={data} />
+          <ShopHover lang={lang} categories={data} />
           {/* End Shop hover card */}
-          <Link href={'/about-us'}>
+          <Link href={lang == 'fa' ? '/fa/about-us' : '/about-us'}>
             <li
               className={cn(
                 'flex items-center gap-1 cursor-pointer  text-lg',
-                pathname === '/about-us'
+                pathname === '/about-us' || pathname === '/fa/about-us'
                   ? 'font-bold text-primary-500 active-dot'
                   : '',
               )}
             >
-              About us
+              {lang == 'fa' ? 'درباره ما' : 'About us'}
             </li>
           </Link>
-          <Link href={'/contact-us'}>
+          <Link href={lang == 'fa' ? '/fa/contact-us' : '/contact-us'}>
             <li
               className={cn(
                 'flex items-center gap-1 cursor-pointer  text-lg',
-                pathname === '/contact-us'
+                pathname === '/contact-us' || pathname === '/fa/contact-us'
                   ? 'font-bold text-primary-500 active-dot'
                   : '',
               )}
             >
-              Contact us
+              {lang == 'fa' ? 'تماس با ما' : 'Contact us'}
             </li>
           </Link>
-          <a href={process.env.NEXT_PUBLIC_BLOG_BASE_URL + '/blog'}>
+          {/* <a href={process.env.NEXT_PUBLIC_BLOG_BASE_URL + '/blog'}>
             <li
               className={cn(
                 'flex items-center gap-1 cursor-pointer  text-lg',
@@ -92,17 +108,19 @@ const Navbar = () => {
             >
               Blog
             </li>
-          </a>
+          </a> */}
         </ul>
       </div>
       <div className="flex gap-2 md:gap-4">
-        <NavbarSearch />
+        <NavbarSearch lang={lang} />
         <Icon
           onClick={() => {
             if (profile) {
-              router.push('/dashboard/main');
+              lang == 'fa'
+                ? router.push('/fa/dashboard/main')
+                : router.push('/dashboard/main');
             } else {
-              router.push('/login');
+              lang == 'fa' ? router.push('/fa/login') : router.push('/login');
             }
           }}
           className={cn(
@@ -122,7 +140,30 @@ const Navbar = () => {
         </Icon>
 
         {/* Mini cart */}
-        <CartButton />
+        <CartButton lang="fa" />
+        {lang == 'fa' ? (
+          <Link
+            href={{
+              pathname: pathname == '/fa' ? '/' : pathname.replace(/^\/fa/, ''),
+              query: Object.fromEntries(searchParams),
+            }}
+            className="flex justify-center items-center  w-8 md:w-14 h-8 md:h-14 cursor-pointer bg-gray-500 rounded-lg md:rounded-2xl text-white"
+            // onClick={handleLanguageToggle}
+          >
+            EN
+          </Link>
+        ) : (
+          <Link
+            href={{
+              pathname: `/fa${pathname}`,
+              query: Object.fromEntries(searchParams),
+            }}
+            className="flex flex-col justify-center items-center w-8 md:w-14 h-8 md:h-14 cursor-pointer bg-gray-500 rounded-lg md:rounded-2xl text-white p-1"
+            // onClick={handleLanguageToggle}
+          >
+            FA
+          </Link>
+        )}
         {/* End Mini Cart */}
       </div>
     </nav>
