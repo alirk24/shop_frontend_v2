@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 
 import { Category } from '@/app/(en)/(core)/shop/page';
 import Icon from '@/components/icon';
+import { useFilteredCategories } from '@/hooks/use-language-filter.hook';
 import {
   HoverCard,
   HoverCardContent,
@@ -24,6 +25,9 @@ const ShopHover = (props: Props) => {
   const router = useRouter();
 
   const [isHoverOpen, setIsHoverOpen] = useState(false);
+  
+  // Apply language filtering to categories
+  const { categories: filteredCategories } = useFilteredCategories(props.categories || []);
 
   return (
     <>
@@ -53,7 +57,7 @@ const ShopHover = (props: Props) => {
           </li>
         </HoverCardTrigger>
         <HoverCardContent className="flex flex-col bg-white md:ml-10 md:mt-5 rounded-xl border-none w-[350px] max-h-[80vh] p-3 overflow-hidden overflow-y-auto no-scrollbar">
-          {props.categories?.map((item) => (
+          {filteredCategories?.map((item) => (
             <Link
               key={item.id}
               href={

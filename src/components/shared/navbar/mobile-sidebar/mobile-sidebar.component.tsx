@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { Category } from '@/app/(en)/(core)/shop/page';
 import SvgMobileSidebarLogo from '@/assets/svg/logo-title-mobile.svg';
 import Icon from '@/components/icon';
+import { useFilteredCategories } from '@/hooks/use-language-filter.hook';
 import {
   AccordionContentFilter,
   AccordionFilter,
@@ -30,6 +31,9 @@ const MobileSidebar = (props: Props) => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const pathname = usePathname();
+  
+  // Apply language filtering to categories
+  const { categories: filteredCategories } = useFilteredCategories(props.categories || []);
 
   const { width } = UseWindowSize();
 
@@ -81,7 +85,7 @@ const MobileSidebar = (props: Props) => {
                 </li>
               </AccordionTriggerFilter>
               <AccordionContentFilter className="py-1">
-                {props.categories?.map((item) => (
+                {filteredCategories?.map((item) => (
                   <Link
                     key={item.id}
                     href={
