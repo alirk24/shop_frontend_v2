@@ -3,32 +3,32 @@ import localFont from 'next/font/local';
 const OpenSansLocalFont = localFont({
   src: [
     {
-      path: './vazirmatn/vazirmatn-Light.ttf',
+      path: './vazirmatn/Vazirmatn-Light.ttf',
       style: 'normal',
       weight: '300',
     },
     {
-      path: './vazirmatn/vazirmatn-Regular.ttf',
+      path: './vazirmatn/Vazirmatn-Regular.ttf',
       style: 'normal',
       weight: '400',
     },
     {
-      path: './vazirmatn/vazirmatn-Medium.ttf',
+      path: './vazirmatn/Vazirmatn-Medium.ttf',
       style: 'normal',
       weight: '500',
     },
     {
-      path: './vazirmatn/vazirmatn-SemiBold.ttf',
+      path: './vazirmatn/Vazirmatn-SemiBold.ttf',
       style: 'normal',
       weight: '600',
     },
     {
-      path: './vazirmatn/vazirmatn-Bold.ttf',
+      path: './vazirmatn/Vazirmatn-Bold.ttf',
       style: 'normal',
       weight: '700',
     },
     {
-      path: './vazirmatn/vazirmatn-ExtraBold.ttf',
+      path: './vazirmatn/Vazirmatn-ExtraBold.ttf',
       style: 'normal',
       weight: '800',
     },
@@ -38,42 +38,42 @@ const OpenSansLocalFont = localFont({
 const NunitoLocalFont = localFont({
   src: [
     {
-      path: './vazirmatn/vazirmatn-ExtraLight.ttf',
+      path: './vazirmatn/Vazirmatn-ExtraLight.ttf',
       style: 'normal',
       weight: '200',
     },
     {
-      path: './vazirmatn/vazirmatn-Light.ttf',
+      path: './vazirmatn/Vazirmatn-Light.ttf',
       style: 'normal',
       weight: '300',
     },
     {
-      path: './vazirmatn/vazirmatn-Regular.ttf',
+      path: './vazirmatn/Vazirmatn-Regular.ttf',
       style: 'normal',
       weight: '400',
     },
     {
-      path: './vazirmatn/vazirmatn-Medium.ttf',
+      path: './vazirmatn/Vazirmatn-Medium.ttf',
       style: 'normal',
       weight: '500',
     },
     {
-      path: './vazirmatn/vazirmatn-SemiBold.ttf',
+      path: './vazirmatn/Vazirmatn-SemiBold.ttf',
       style: 'normal',
       weight: '600',
     },
     {
-      path: './vazirmatn/vazirmatn-Bold.ttf',
+      path: './vazirmatn/Vazirmatn-Bold.ttf',
       style: 'normal',
       weight: '700',
     },
     {
-      path: './vazirmatn/vazirmatn-ExtraBold.ttf',
+      path: './vazirmatn/Vazirmatn-ExtraBold.ttf',
       style: 'normal',
       weight: '800',
     },
     {
-      path: './vazirmatn/vazirmatn-Black.ttf',
+      path: './vazirmatn/Vazirmatn-Black.ttf',
       style: 'normal',
       weight: '900',
     },

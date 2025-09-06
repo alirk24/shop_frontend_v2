@@ -44,17 +44,19 @@ export const revalidate = 0;
 export const generateMetadata = async ({
   params,
 }: {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }): Promise<Metadata> => {
-  const data = await getSingleProduct(params.productId);
+  const { productId } = await params;
+  const data = await getSingleProduct(productId);
 
   return {
     title: `uspetinc - ${data.name}`,
   };
 };
 
-const page = async (props: { params: { productId: string } }) => {
-  const data = await getSingleProduct(props.params.productId);
+const page = async (props: { params: Promise<{ productId: string }> }) => {
+  const { productId } = await props.params;
+  const data = await getSingleProduct(productId);
 
   return <ProductDetails lang="en" product={data} />;
 };

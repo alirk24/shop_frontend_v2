@@ -1,12 +1,7 @@
-FROM node:20-alpine AS base
+FROM node:20 AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-# Install compatibility libraries for better compatibility with Node.js native modules
-# Try multiple mirror sources and fallback options
-RUN (apk update || (sed -i 's/dl-cdn.alpinelinux.org/alpinelinux.global.ssl.fastly.net/g' /etc/apk/repositories && apk update)) && \
-    (apk add --no-cache libc6-compat || apk add --no-cache gcompat || echo "Warning: Could not install compatibility libraries") && \
-    rm -rf /var/cache/apk/*
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
@@ -22,17 +17,15 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
+# Environment variables for build
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
@@ -42,12 +35,11 @@ RUN \
   fi
 
 # Production image, copy all the files and run next
-FROM base AS runner
+FROM node:20-slim AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

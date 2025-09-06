@@ -18,7 +18,7 @@ type HomeSuperSaleProps = {
 };
 
 const HomeSuperSale = (props: HomeSuperSaleProps) => {
-  const swiperRef = useRef<SwiperType>();
+  const swiperRef = useRef<SwiperType | null>(null);
 
   return (
     <main className="md:px-20 flex flex-col-reverse md:grid md:grid-cols-12 gap-5 w-full mt-16 md:mt-24">
