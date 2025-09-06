@@ -4,6 +4,7 @@ import Icon from '@/components/icon';
 import { Input } from '@/components/ui/input';
 import LoadingSpinner from '@/components/ui/loading-spinner';
 import { cn } from '@/lib/utils';
+import { useFilteredProducts } from '@/hooks/use-language-filter.hook';
 
 import SvgFilterMobile from '@icons/filter-sort-menu-mobile.svg';
 import SvgSearchMobile from '@icons/search-loupe-custom-mobile.svg';
@@ -17,6 +18,9 @@ import ShopProductCard from './cards/shop-product-card.component';
 
 const ShopProducts = ({ lang = 'en' }) => {
   const { data, isPending } = useFiltersQuery();
+  
+  // Apply language filtering to products
+  const { products: filteredProducts } = useFilteredProducts(data || []);
 
   const setIsModalOpen = useFilterModalStore((s) => s.setIsModalOpen);
 
@@ -50,8 +54,8 @@ const ShopProducts = ({ lang = 'en' }) => {
           ))}
         </div>
         <p className="md:text-base text-xs text-text-400">
-          {lang == 'fa' ? 'نمایش' : 'Showing'} {data?.length || 0}{' '}
-          {lang == 'fa' ? 'از' : 'of'} {data?.length || 0}{' '}
+          {lang == 'fa' ? 'نمایش' : 'Showing'} {filteredProducts?.length || 0}{' '}
+          {lang == 'fa' ? 'از' : 'of'} {filteredProducts?.length || 0}{' '}
           {lang == 'fa' ? 'نتایج' : 'results'}
         </p>
       </section>
@@ -82,15 +86,15 @@ const ShopProducts = ({ lang = 'en' }) => {
 
       {isPending && <LoadingSpinner className="mt-6" />}
 
-      {!isPending && data && data.length === 0 && (
+      {!isPending && filteredProducts && filteredProducts.length === 0 && (
         <p className="mt-10 text-center text-lg">
           {lang == 'fa' ? 'نتیجه‌ای پیدا نشد' : 'Nothing to show'}
         </p>
       )}
 
-      {!isPending && data && data?.length > 0 && (
+      {!isPending && filteredProducts && filteredProducts?.length > 0 && (
         <section className="flex flex-col gap-4 md:gap-x-6 md:gap-y-8 md:grid md:grid-cols-3 mt-6">
-          {data.map((item) => (
+          {filteredProducts.map((item) => (
             <ShopProductCard lang={lang} key={item.id} {...item} />
           ))}
         </section>

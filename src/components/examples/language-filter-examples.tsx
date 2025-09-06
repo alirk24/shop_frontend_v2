@@ -108,7 +108,7 @@ export function ProductsDisplay({ products }: ProductsDisplayProps) {
               </span>
               {product.total_discount > 0 && (
                 <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">
-                  -{product.discount}%
+                  -{product.total_discount}%
                 </span>
               )}
             </div>
