@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import React from 'react';
 
 import { axiosInstance } from '@/lib/constants/axios';
+import { filterCategoriesByLanguage } from '@/lib/utils/language-filter';
 import { SubCategory } from '@/routes/admin/sub-categories/queries/admin-sub-categories.query';
 import { Pet } from '@/routes/home';
 import Shop from '@/routes/shop';
@@ -26,12 +27,15 @@ export type Category = {
 
 const page = async () => {
   const { brands, categories, pets, subCategories } = await getFilterData();
+  
+  // Filter categories to show only English ones (without Persian characters)
+  const filteredCategories = filterCategoriesByLanguage(categories, 'en');
 
   return (
     <Shop
       lang="en"
       brands={brands}
-      categories={categories}
+      categories={filteredCategories}
       pets={pets}
       subCategories={subCategories}
     />

@@ -10,6 +10,7 @@ import SvgCatFootDesktop from '@/assets/svg/cat-foot-filled-desktop.svg';
 import SvgCatFoot from '@/assets/svg/cat-foot-filled.svg';
 import Icon from '@/components/icon';
 import { Button } from '@/components/ui/button';
+import { useFilteredProducts } from '@/hooks/use-language-filter.hook';
 
 import TopSellingProductCard from './cards/top-selling-product-card.component';
 
@@ -20,6 +21,7 @@ type HomeTopSellingProductsProps = {
 
 const HomeTopSellingProducts = (props: HomeTopSellingProductsProps) => {
   const router = useRouter();
+  const filteredProducts = useFilteredProducts(props.products);
 
   return (
     <main className="md:px-20">
@@ -45,7 +47,7 @@ const HomeTopSellingProducts = (props: HomeTopSellingProductsProps) => {
               'swiper-pagination-bullet-active white-pagination-active',
           }}
         >
-          {props.products.map((p) => (
+          {filteredProducts.map((p) => (
             <SwiperSlide key={p.id}>
               <TopSellingProductCard {...p} lang={props.lang} />
             </SwiperSlide>
@@ -61,7 +63,7 @@ const HomeTopSellingProducts = (props: HomeTopSellingProductsProps) => {
           spaceBetween={24}
           slidesPerView={3}
         >
-          {props.products.map((p) => (
+          {filteredProducts.map((p) => (
             <SwiperSlide key={p.id} className="h-[358px]">
               <TopSellingProductCard {...p} lang={props.lang} />
             </SwiperSlide>
