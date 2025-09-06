@@ -26,6 +26,8 @@ COPY . .
 # Environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
+ENV NEXT_PUBLIC_BASE_URL=https://api.ark-24.ir
+ENV NEXT_PUBLIC_BLOG_BASE_URL=https://api.ark-24.ir
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \

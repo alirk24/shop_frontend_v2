@@ -77,59 +77,83 @@ export type Blog = {
 };
 
 async function getHomePageData() {
-  const results = await Promise.allSettled([
-    axiosInstance
-      .get<Product[]>('/shop/api/v1/homepage/best-selling/')
-      .then((res) => res.data),
-    axiosInstance
-      .get<Brand[]>('/shop/api/v1/homepage/brands/')
-      .then((res) => res.data),
-    axiosInstance
-      .get<Category[]>('/shop/api/v1/homepage/categories-list/')
-      .then((res) => res.data),
-    axiosInstance
-      .get<Product[]>('/shop/api/v1/homepage/sale/')
-      .then((res) => res.data),
-    axiosInstance
-      .get<Product[]>('/shop/api/v1/homepage/top-products/')
-      .then((res) => res.data),
-    axiosInstance.get<Pet[]>('/shop/api/v1/pets/').then((res) => res.data),
-    axiosInstance
-      .get<Banner[]>('/shop/api/v1/homepage/banners/')
-      .then((res) => res.data),
-    // axiosBlog
-    //   .get<Blog[]>('/blog/wp-json/uspet/v1/posts')
-    //   .then((res) => res.data),
-  ]);
+  try {
+    const results = await Promise.allSettled([
+      axiosInstance
+        .get<Product[]>('/shop/api/v1/homepage/best-selling/')
+        .then((res) => res.data),
+      axiosInstance
+        .get<Brand[]>('/shop/api/v1/homepage/brands/')
+        .then((res) => res.data),
+      axiosInstance
+        .get<Category[]>('/shop/api/v1/homepage/categories-list/')
+        .then((res) => res.data),
+      axiosInstance
+        .get<Product[]>('/shop/api/v1/homepage/sale/')
+        .then((res) => res.data),
+      axiosInstance
+        .get<Product[]>('/shop/api/v1/homepage/top-products/')
+        .then((res) => res.data),
+      axiosInstance.get<Pet[]>('/shop/api/v1/pets/').then((res) => res.data),
+      axiosInstance
+        .get<Banner[]>('/shop/api/v1/homepage/banners/')
+        .then((res) => res.data),
+      // axiosBlog
+      //   .get<Blog[]>('/blog/wp-json/uspet/v1/posts')
+      //   .then((res) => res.data),
+    ]);
 
-  const rejectedIndex = results.findIndex((r) => r.status === 'rejected');
-  console.log(results);
-  if (rejectedIndex !== -1) {
-    throw new Error('Something went wrong!');
+    // Handle results gracefully - use empty arrays for failed requests
+    const processedResults = results.map((result, index) => {
+      if (result.status === 'rejected') {
+        console.warn(`Failed to fetch data for request ${index}:`, result.reason);
+        return []; // Return empty array for failed requests
+      }
+      return result.value;
+    });
+
+    return [
+      processedResults[0] || [],
+      processedResults[1] || [],
+      processedResults[2] || [],
+      processedResults[3] || [],
+      processedResults[4] || [],
+      processedResults[5] || [],
+      processedResults[6] || [],
+      // processedResults[7] || [],
+    ] as [
+      Product[],
+      Brand[],
+      Category[],
+      Product[],
+      Product[],
+      Pet[],
+      Banner[],
+      // Blog[],
+    ];
+  } catch (error) {
+    // Fallback for complete failure - return empty arrays
+    console.warn('Complete failure fetching homepage data:', error);
+    return [
+      [], // bestSelling
+      [], // brands
+      [], // categories
+      [], // onSales
+      [], // topCategories
+      [], // pets
+      [], // banners
+      // [], // blog
+    ] as [
+      Product[],
+      Brand[],
+      Category[],
+      Product[],
+      Product[],
+      Pet[],
+      Banner[],
+      // Blog[],
+    ];
   }
-
-  const fulfilledResults = results.filter(
-    (r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled',
-  );
-  return [
-    fulfilledResults[0].value,
-    fulfilledResults[1].value,
-    fulfilledResults[2].value,
-    fulfilledResults[3].value,
-    fulfilledResults[4].value,
-    fulfilledResults[5].value,
-    fulfilledResults[6].value,
-    // fulfilledResults[7].value,
-  ] as [
-    Product[],
-    Brand[],
-    Category[],
-    Product[],
-    Product[],
-    Pet[],
-    Banner[],
-    // Blog[],
-  ];
 }
 
 export default Home;

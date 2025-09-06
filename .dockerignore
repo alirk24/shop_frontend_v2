@@ -7,3 +7,12 @@ README.md
 !.next/static
 !.next/standalone
 .git
+
+# examples and tests
+src/components/examples
+test-language-filter.js
+*.test.js
+*.test.ts
+*.test.tsx
+LANGUAGE_FILTERING_GUIDE.md
+UPDATE_SUMMARY.md

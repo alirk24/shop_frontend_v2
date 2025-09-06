@@ -29,12 +29,18 @@ const AboutUs = async ({ lang = 'en' }) => {
   );
 };
 
-const getData = async () => {
-  const response = await axiosInstance
-    .get<Brand[]>('/shop/api/v1/homepage/brands/')
-    .then((res) => res.data);
-
-  return response;
+const getData = async (): Promise<Brand[]> => {
+  try {
+    const response = await axiosInstance
+      .get<Brand[]>('/shop/api/v1/homepage/brands/')
+      .then((res) => res.data);
+    
+    return response;
+  } catch (error) {
+    // Return empty array during build time or when API is unavailable
+    console.warn('Failed to fetch brands data:', error);
+    return [];
+  }
 };
 
 export default AboutUs;

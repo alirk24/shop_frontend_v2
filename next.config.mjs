@@ -19,6 +19,11 @@ const nextConfig = {
     return config;
   },
   output: 'standalone',
+  // Disable static optimization for pages that make API calls during build
+  experimental: {
+    workerThreads: false,
+    cpus: 1
+  },
 };
 
 export default nextConfig;
