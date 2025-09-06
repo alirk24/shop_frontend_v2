@@ -21,7 +21,7 @@ type HomeTopSellingProductsProps = {
 
 const HomeTopSellingProducts = (props: HomeTopSellingProductsProps) => {
   const router = useRouter();
-  const filteredProducts = useFilteredProducts(props.products);
+  const { products: filteredProducts } = useFilteredProducts(props.products);
 
   return (
     <main className="md:px-20">

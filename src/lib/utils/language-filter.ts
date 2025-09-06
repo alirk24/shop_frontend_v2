@@ -49,12 +49,11 @@ export interface Product {
   published_date: string;
   active_promotions: any;
   image_urls: string[];
-  IngredientsAnalysis: string | null;
-  ShippingReturns: string | null;
+  IngredientsAnalysis?: string;
+  ShippingReturns?: string;
   is_best_selling: boolean;
   is_top: boolean;
   is_on_sale: boolean;
-  discount: number;
 }
 
 /**
